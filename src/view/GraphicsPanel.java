@@ -1,4 +1,6 @@
 package view;
 
-public class GraphicsPanel {
+import javax.swing.*;
+
+public class GraphicsPanel extends JPanel {
 }
