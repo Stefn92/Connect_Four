@@ -1,11 +1,10 @@
 package view;
 
+import model.FieldConstants;
 import model.Grid;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.geom.Ellipse2D;
 
 public class GraphicsPanel extends JPanel {
 
@@ -29,6 +28,15 @@ public class GraphicsPanel extends JPanel {
         g2d.setColor(Color.WHITE);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
+                if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
+                    g2d.setColor(Color.RED);
+                }
+                else if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER2) {
+                    g2d.setColor(Color.YELLOW);
+                }
+                else {
+                    g2d.setColor(Color.WHITE);
+                }
                 g2d.fill(grid.getGridArray()[i][j]);
             }
         }
@@ -40,9 +48,5 @@ public class GraphicsPanel extends JPanel {
 
     public void setGrid(Grid grid) {
         this.grid = grid;
-    }
-
-    public void addComponentListener(ComponentAdapter ca) {
-        addComponentListener(ca);
     }
 }
