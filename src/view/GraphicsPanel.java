@@ -26,8 +26,8 @@ public class GraphicsPanel extends JPanel {
 
         // Zeichne die Kreise
         g2d.setColor(Color.WHITE);
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
                 if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
                     g2d.setColor(Color.RED);
                 }
