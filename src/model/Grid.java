@@ -38,7 +38,7 @@ public class Grid {
     public boolean refreshGrid(int x, int y, int filledBy) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                if (getGridArray()[i][j].contains(x,y) && getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_UNFILLABLE) {
+                if (getGridArray()[i][j].contains(x,y) && getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
                     getGridArray()[i][j].setStatus(filledBy);
                     return true;
                 }
@@ -67,12 +67,15 @@ public class Grid {
         }
     }*/
 
-    // TODO
+    // TODO Funktioniert noch überhaupt nicht
     public void refreshFieldStates() {
         for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 6; j++) {
-                if (getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_UNFILLABLE || getGridArray()[i-1][j].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
-                    //getGridArray()[i-1][j].setStatus();
+            for (int j = 5; j > 1; j--) {
+                if (getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_UNFILLABLE || getGridArray()[i-1][j].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
+                    if (getGridArray()[i][j-1].getStatus() == FieldConstants.FILLED_BY_PLAYER2 || getGridArray()[i][j-1].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
+                        getGridArray()[i][j].setStatus(FieldConstants.UNFILLED_FILLABLE);
+                        break;
+                    }
                 }
             }
         }
