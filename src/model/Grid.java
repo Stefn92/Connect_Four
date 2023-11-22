@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 
 public class Grid {
 
+    // Das Rechteck für das "Spielfeld"
     private Rectangle2D.Double rect;
     private Field[][] gridArray;
 
@@ -24,13 +25,10 @@ public class Grid {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 gridArray[i][j] = new Field(xCord,yCord, 60, 60);
-                //xCord += 80;
                 yCord -= 80;
             }
-            //yCord -= 80;
             yCord = 500;
             xCord += 80;
-            //xCord = 160;
         }
     }
 
@@ -57,21 +55,15 @@ public class Grid {
         }
     }
 
-    /*public void refreshFieldStates() {
-        for (int i = 5; i > 0; i--) {
-            for (int j = 0; j < 7; j++) {
-                if (getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER1 || getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER2) {
-                    getGridArray()[i+1][j].setStatus(FieldConstants.UNFILLED_FILLABLE);
-                }
-            }
-        }
-    }*/
-
     // TODO Funktioniert noch überhaupt nicht
     public void refreshFieldStates() {
         for (int i = 0; i < 7; i++) {
-            for (int j = 5; j > 1; j--) {
-                if (getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_UNFILLABLE || getGridArray()[i-1][j].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
+            for (int j = 5; j >= 0; j--) {
+                if (j == 0) {
+                    getGridArray()[i][j].setStatus(FieldConstants.UNFILLED_FILLABLE);
+                    break;
+                }
+                else if (getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_UNFILLABLE || getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
                     if (getGridArray()[i][j-1].getStatus() == FieldConstants.FILLED_BY_PLAYER2 || getGridArray()[i][j-1].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
                         getGridArray()[i][j].setStatus(FieldConstants.UNFILLED_FILLABLE);
                         break;

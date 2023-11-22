@@ -51,6 +51,7 @@ public class GameController {
     public void calculateGrid() {
         grid.updateGridPositions(gPanel.getWidth(), gPanel.getHeight());
         grid.resetFieldStates();
+        grid.refreshFieldStates();
         gPanel.setGrid(grid);
         gPanel.repaint();
     }
