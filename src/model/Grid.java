@@ -33,6 +33,14 @@ public class Grid {
     }
 
     // Gibt bei gültiger Benutzereingabe "True" zurück und ändert den Status des betreffenden Feldes
+
+    /**
+     *
+     * @param x Die X-Koordinate des Mausklicks
+     * @param y Die Y-Koordinate des Mausklicks
+     * @param filledBy Der Wert welcher Spieler den Mausklick gesetzt hat
+     * @return Ob der Mausklick korrekt in ein Feld gesetzt wurde.
+     */
     public boolean refreshGrid(int x, int y, int filledBy) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
@@ -45,6 +53,7 @@ public class Grid {
         return false;
     }
 
+    // Setzt den Status aller Felder im Grid zurück auf Standard
     public void resetFieldStates() {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
@@ -71,6 +80,8 @@ public class Grid {
                 }
             }
         }
+        System.out.println(getGridArray()[1][0].getStatus());
+        System.out.println(getGridArray()[1][1].getStatus());
     }
 
     public Rectangle2D.Double getRect() {
