@@ -80,8 +80,6 @@ public class Grid {
                 }
             }
         }
-        System.out.println(getGridArray()[1][0].getStatus());
-        System.out.println(getGridArray()[1][1].getStatus());
     }
 
     public Rectangle2D.Double getRect() {

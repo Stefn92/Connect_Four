@@ -24,20 +24,25 @@ public class GraphicsPanel extends JPanel {
         g2d.setColor(new Color(86, 86, 86));
         g2d.fill(grid.getRect());
 
-        // Zeichne die Kreise
+        // Zeichnet die leeren Kreise
         g2d.setColor(Color.WHITE);
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+                g2d.fill(grid.getGridArray()[i][j]);
+            }
+        }
+
+        // Färbt die Kreise je nach Status ein
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
                     g2d.setColor(Color.RED);
+                    g2d.fill(grid.getGridArray()[i][j]);
                 }
                 else if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER2) {
                     g2d.setColor(Color.YELLOW);
+                    g2d.fill(grid.getGridArray()[i][j]);
                 }
-                else {
-                    g2d.setColor(Color.WHITE);
-                }
-                g2d.fill(grid.getGridArray()[i][j]);
             }
         }
     }

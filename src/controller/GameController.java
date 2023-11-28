@@ -89,8 +89,8 @@ public class GameController {
 
             updateFilledBy();
             if (grid.refreshGrid(e.getX(), e.getY(), filledBy)) {
-                gPanel.setGrid(grid);
                 grid.refreshFieldStates();
+                gPanel.setGrid(grid);
                 updateMyTurn();
                 gPanel.repaint();
             }

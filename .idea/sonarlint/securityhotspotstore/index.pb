@@ -21,3 +21,7 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 @
 Connect_Four.iml,8\8\88506f60feb4c09b15a99f957c2dbaf116845d3f
+N
+src/model/WinnerConstants.java,e\c\ec0d6cd1af1132eb2b630443ee9bf9875e15746b
+A
+src/view/GUI.java,e\8\e8e79fa8fa89d15423e1f81be85e2f87988f57d6
