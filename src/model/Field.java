@@ -18,7 +18,7 @@ public class Field extends Ellipse2D implements FieldConstants {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.status = FieldConstants.UNFILLED_FILLABLE;
+        this.status = UNFILLED_FILLABLE;
     }
     @Override
     public double getX() {
@@ -47,7 +47,10 @@ public class Field extends Ellipse2D implements FieldConstants {
 
     @Override
     public void setFrame(double x, double y, double w, double h) {
-
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
     }
 
     @Override

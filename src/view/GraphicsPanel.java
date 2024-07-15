@@ -22,7 +22,7 @@ public class GraphicsPanel extends JPanel {
 
         // Zeichne das Rechteck
         g2d.setColor(new Color(86, 86, 86));
-        g2d.fill(grid.getRect());
+        g2d.fill(grid.getField());
 
         // Zeichnet die leeren Kreise
         g2d.setColor(Color.WHITE);

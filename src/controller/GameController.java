@@ -49,7 +49,8 @@ public class GameController {
     }
 
     public void calculateGrid() {
-        grid.updateGridPositions(gPanel.getWidth(), gPanel.getHeight());
+        grid.fillGridArray();
+        grid.updateGridDimensions(gPanel.getWidth(), gPanel.getHeight());
         grid.resetFieldStates();
         grid.refreshFieldStates();
         gPanel.setGrid(grid);
@@ -60,7 +61,7 @@ public class GameController {
 
         @Override
         public void componentResized(ComponentEvent e) {
-            grid.updateGridPositions(gPanel.getWidth(), gPanel.getHeight());
+            grid.updateGridDimensions(gPanel.getWidth(), gPanel.getHeight());
             gPanel.repaint();
         }
 
@@ -88,7 +89,8 @@ public class GameController {
         public void mouseClicked(MouseEvent e) {
 
             updateFilledBy();
-            if (grid.refreshGrid(e.getX(), e.getY(), filledBy)) {
+            boolean refresh = grid.refreshGrid(e.getX(), e.getY(), filledBy);
+            if (refresh) {
                 grid.refreshFieldStates();
                 gPanel.setGrid(grid);
                 updateMyTurn();
