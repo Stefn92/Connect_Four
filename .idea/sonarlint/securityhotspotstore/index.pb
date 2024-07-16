@@ -27,3 +27,5 @@ K
 src/view/GraphicsPanel.java,d\f\df9f8d328b397a70519ec1768e58c56a7b17cbfa
 N
 src/model/WinnerConstants.java,e\c\ec0d6cd1af1132eb2b630443ee9bf9875e15746b
+I
+src/model/WinChecker.java,6\0\604b4440833147bd77f05c276512dc1dd31ea403

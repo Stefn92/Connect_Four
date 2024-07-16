@@ -92,6 +92,9 @@ public class GameController {
             boolean refresh = grid.refreshGrid(e.getX(), e.getY(), filledBy);
             if (refresh) {
                 grid.refreshFieldStates();
+                if (winChecker.detectWinner(grid) == FieldConstants.FILLED_BY_PLAYER1 || winChecker.detectWinner(grid) == FieldConstants.FILLED_BY_PLAYER2) {
+                    System.out.println("Es gibt einen Gewinner!");
+                }
                 gPanel.setGrid(grid);
                 updateMyTurn();
                 gPanel.repaint();

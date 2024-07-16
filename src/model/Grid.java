@@ -4,9 +4,8 @@ import java.awt.geom.Rectangle2D;
 
 public class Grid {
 
-    // Das Rechteck für das "Spielfeld"
-    private Rectangle2D.Double field;
-    private Field[][] gridArray;
+    private Rectangle2D.Double field; // Das Rechteck für das Spielfeld
+    private Field[][] gridArray; // Array für die Felder im Spielfeld
 
     public Grid() {
         field = new Rectangle2D.Double();
@@ -68,6 +67,7 @@ public class Grid {
         printFieldStates();
     }
 
+    // Aktualisiert die Status der Felder
     public void refreshFieldStates() {
         System.out.println("Führe refreshFieldStates aus...");
         for (int i = 0; i < 7; i++) {

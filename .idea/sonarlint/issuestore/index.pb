@@ -27,3 +27,5 @@ C
 src/model/Grid.java,9\d\9da8f0d38e670a1667f4d998bfc6168c23777413
 N
 src/model/WinnerConstants.java,e\c\ec0d6cd1af1132eb2b630443ee9bf9875e15746b
+I
+src/model/WinChecker.java,6\0\604b4440833147bd77f05c276512dc1dd31ea403
