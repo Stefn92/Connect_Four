@@ -10,12 +10,11 @@ public class Field extends Ellipse2D implements FieldConstants {
     private double y;
     private double width;
     private double height;
-    private String id;
     private int status;
 
-    public Field(double x, double y, double width, double height) {
-        this.x = x;
-        this.y = y;
+    public Field(double width, double height) {
+        this.x = 0;
+        this.y = 0;
         this.width = width;
         this.height = height;
         this.status = UNFILLED_FILLABLE;
@@ -64,12 +63,12 @@ public class Field extends Ellipse2D implements FieldConstants {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Field field = (Field) o;
-        return java.lang.Double.compare(field.getX(), getX()) == 0 && java.lang.Double.compare(field.getY(), getY()) == 0 && java.lang.Double.compare(field.getWidth(), getWidth()) == 0 && java.lang.Double.compare(field.getHeight(), getHeight()) == 0 && status == field.status && Objects.equals(id, field.id);
+        return java.lang.Double.compare(field.getX(), getX()) == 0 && java.lang.Double.compare(field.getY(), getY()) == 0 && java.lang.Double.compare(field.getWidth(), getWidth()) == 0 && java.lang.Double.compare(field.getHeight(), getHeight()) == 0 && getStatus() == field.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getX(), getY(), getWidth(), getHeight(), id, status);
+        return Objects.hash(super.hashCode(), getX(), getY(), getWidth(), getHeight(), getStatus());
     }
 
     public int getStatus() {

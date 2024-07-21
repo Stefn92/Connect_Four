@@ -15,7 +15,7 @@ public class Grid {
     public void fillGridArray() {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                gridArray[i][j] = new Field(0,0, 60, 60);
+                gridArray[i][j] = new Field(60, 60);
             }
         }
     }
@@ -43,8 +43,9 @@ public class Grid {
     public boolean refreshGrid(int x, int y, int filledBy) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                if (getGridArray()[i][j].contains(x,y) && getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
-                    getGridArray()[i][j].setStatus(filledBy);
+                Field currentField = getGridArray()[i][j];
+                if (currentField.contains(x,y) && currentField.getStatus() == FieldConstants.UNFILLED_FILLABLE) {
+                    currentField.setStatus(filledBy);
                     return true;
                 }
             }

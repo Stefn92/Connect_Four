@@ -25,7 +25,7 @@ R
 "src/controller/GameController.java,d\3\d3dbc206622453c131557dd560613ca5878ff1e6
 K
 src/view/GraphicsPanel.java,d\f\df9f8d328b397a70519ec1768e58c56a7b17cbfa
-N
-src/model/WinnerConstants.java,e\c\ec0d6cd1af1132eb2b630443ee9bf9875e15746b
 I
 src/model/WinChecker.java,6\0\604b4440833147bd77f05c276512dc1dd31ea403
+E
+src/model/Winner.java,d\8\d82188f5a6612cda4346d70b4538c965b3d4b2e2

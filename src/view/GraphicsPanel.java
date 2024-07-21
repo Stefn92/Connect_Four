@@ -21,7 +21,8 @@ public class GraphicsPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Zeichne das Rechteck
-        g2d.setColor(new Color(86, 86, 86));
+        Color rectColor = new Color(86, 86, 86);
+        g2d.setColor(rectColor);
         g2d.fill(grid.getField());
 
         // Zeichnet die leeren Kreise
