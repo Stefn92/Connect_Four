@@ -15,7 +15,7 @@ public class GUI extends JFrame {
 
     public GUI() {
 
-        mainPanel = new JPanel(new GridLayout(4, 1));
+        mainPanel = new JPanel(new GridLayout(3, 1));
         setContentPane(mainPanel);
 
         playAgainstPlayerButton = new JButton("Spieler vs Spieler");

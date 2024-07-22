@@ -6,6 +6,8 @@ public class Grid {
 
     private Rectangle2D.Double field; // Das Rechteck für das Spielfeld
     private Field[][] gridArray; // Array für die Felder im Spielfeld
+    private FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
+    private FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
 
     public Grid() {
         field = new Rectangle2D.Double();
@@ -40,11 +42,11 @@ public class Grid {
     }
 
     // Gibt bei gültiger Benutzereingabe "True" zurück und ändert den Status des betreffenden Feldes
-    public boolean refreshGrid(int x, int y, int filledBy) {
+    public boolean refreshGrid(int x, int y, FieldStatus filledBy) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 Field currentField = getGridArray()[i][j];
-                if (currentField.contains(x,y) && currentField.getStatus() == FieldConstants.UNFILLED_FILLABLE) {
+                if (currentField.contains(x,y) && currentField.getStatus() == UNFILLED_FILLABLE) {
                     currentField.setStatus(filledBy);
                     return true;
                 }
@@ -58,10 +60,10 @@ public class Grid {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 if (j == 0) {
-                    getGridArray()[i][j].setStatus(FieldConstants.UNFILLED_FILLABLE);
+                    getGridArray()[i][j].setStatus(UNFILLED_FILLABLE);
                 }
                 else {
-                    getGridArray()[i][j].setStatus(FieldConstants.UNFILLED_UNFILLABLE);
+                    getGridArray()[i][j].setStatus(UNFILLED_UNFILLABLE);
                 }
             }
         }
@@ -70,18 +72,15 @@ public class Grid {
 
     // Aktualisiert die Status der Felder
     public void refreshFieldStates() {
-        System.out.println("Führe refreshFieldStates aus...");
         for (int i = 0; i < 7; i++) {
             for (int j = 1; j < 6; j++) {
-                if (getGridArray()[i][j].getStatus() == FieldConstants.UNFILLED_UNFILLABLE) {
-                    if (getGridArray()[i][j-1].getStatus() == FieldConstants.FILLED_BY_PLAYER2 || getGridArray()[i][j-1].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
-                        getGridArray()[i][j].setStatus(FieldConstants.UNFILLED_FILLABLE);
-                        System.out.println("i=" + i + "j=" + j);
+                if (getGridArray()[i][j].getStatus() == UNFILLED_UNFILLABLE) {
+                    if (getGridArray()[i][j-1].getStatus() == FieldStatus.FILLED_BY_PLAYER2 || getGridArray()[i][j-1].getStatus() == FieldStatus.FILLED_BY_PLAYER1) {
+                        getGridArray()[i][j].setStatus(UNFILLED_FILLABLE);
                     }
                 }
             }
         }
-        //printFieldStates();
     }
 
     public void printFieldStates() {

@@ -4,20 +4,20 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
-public class Field extends Ellipse2D implements FieldConstants {
+public class Field extends Ellipse2D {
 
     private double x;
     private double y;
     private double width;
     private double height;
-    private int status;
+    private FieldStatus status;
 
     public Field(double width, double height) {
         this.x = 0;
         this.y = 0;
         this.width = width;
         this.height = height;
-        this.status = UNFILLED_FILLABLE;
+        this.status = FieldStatus.UNFILLED_UNFILLABLE;
     }
     @Override
     public double getX() {
@@ -71,11 +71,11 @@ public class Field extends Ellipse2D implements FieldConstants {
         return Objects.hash(super.hashCode(), getX(), getY(), getWidth(), getHeight(), getStatus());
     }
 
-    public int getStatus() {
+    public FieldStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(FieldStatus status) {
         this.status = status;
     }
 }

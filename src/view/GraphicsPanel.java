@@ -1,6 +1,7 @@
 package view;
 
-import model.FieldConstants;
+import model.Field;
+import model.FieldStatus;
 import model.Grid;
 
 import javax.swing.*;
@@ -8,7 +9,7 @@ import java.awt.*;
 
 public class GraphicsPanel extends JPanel {
 
-    private Grid grid;
+    private transient Grid grid;
 
     public GraphicsPanel() {
         setBackground(Color.WHITE);
@@ -27,6 +28,7 @@ public class GraphicsPanel extends JPanel {
 
         // Zeichnet die leeren Kreise
         g2d.setColor(Color.WHITE);
+
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 g2d.fill(grid.getGridArray()[i][j]);
@@ -36,13 +38,17 @@ public class GraphicsPanel extends JPanel {
         // Färbt die Kreise je nach Status ein
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
+
+                Field currentField = grid.getGridArray()[i][j];
+                FieldStatus currentStatus = grid.getGridArray()[i][j].getStatus();
+
+                if (currentStatus == FieldStatus.FILLED_BY_PLAYER1) {
                     g2d.setColor(Color.RED);
-                    g2d.fill(grid.getGridArray()[i][j]);
+                    g2d.fill(currentField);
                 }
-                else if (grid.getGridArray()[i][j].getStatus() == FieldConstants.FILLED_BY_PLAYER2) {
+                else if (currentStatus == FieldStatus.FILLED_BY_PLAYER2) {
                     g2d.setColor(Color.YELLOW);
-                    g2d.fill(grid.getGridArray()[i][j]);
+                    g2d.fill(currentField);
                 }
             }
         }

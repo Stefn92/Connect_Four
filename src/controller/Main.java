@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 
 public class Main {
 
-    GameController gc;
-    GUI gui;
+    private GameController gc;
+    private GUI gui;
 
     public static void main(String[] args) {
         Main main = new Main();

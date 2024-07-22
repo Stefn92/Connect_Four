@@ -83,7 +83,7 @@ public class GameController {
 
     class MouseListenerClass implements MouseListener {
 
-        int filledBy;
+        FieldStatus filledBy;
 
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -92,7 +92,7 @@ public class GameController {
             boolean refresh = grid.refreshGrid(e.getX(), e.getY(), filledBy);
             if (refresh) {
                 grid.refreshFieldStates();
-                if (winChecker.detectWinner(grid) == FieldConstants.FILLED_BY_PLAYER1 || winChecker.detectWinner(grid) == FieldConstants.FILLED_BY_PLAYER2) {
+                if (winChecker.detectWinner(grid) == WinnerStatus.WINNER_PLAYER1 || winChecker.detectWinner(grid) == WinnerStatus.WINNER_PLAYER2) {
                     System.out.println("Es gibt einen Gewinner!");
                 }
                 gPanel.setGrid(grid);
@@ -123,10 +123,10 @@ public class GameController {
 
         public void updateFilledBy() {
             if (player1.isMyTurn()) {
-                filledBy = FieldConstants.FILLED_BY_PLAYER1;
+                filledBy = FieldStatus.FILLED_BY_PLAYER1;
             }
             else {
-                filledBy = FieldConstants.FILLED_BY_PLAYER2;
+                filledBy = FieldStatus.FILLED_BY_PLAYER2;
             }
         }
 
