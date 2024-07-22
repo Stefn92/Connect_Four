@@ -81,7 +81,7 @@ public class Grid {
                 }
             }
         }
-        printFieldStates();
+        //printFieldStates();
     }
 
     public void printFieldStates() {

@@ -1,6 +1,6 @@
 package model;
 
-public enum Winner {
+public enum WinnerStatus {
     NO_WINNER,
     WINNER_PLAYER1,
     WINNER_PLAYER2

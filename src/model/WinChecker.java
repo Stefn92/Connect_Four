@@ -12,7 +12,6 @@ public class WinChecker {
     public static final int WINNER_PLAYER1 = 1;
     public static final int WINNER_PLAYER2 = 2;
 
-
     public int detectWinner(Grid grid) {
         this.grid = grid;
         gridArray = grid.getGridArray();
@@ -75,31 +74,38 @@ public class WinChecker {
 
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
-                if (gridArray[j][i].getStatus() == FieldConstants.FILLED_BY_PLAYER1) {
+
+                int currentStatus = gridArray[j][i].getStatus();
+
+                if (currentStatus == FieldConstants.FILLED_BY_PLAYER1) {
                     inARowPlayer1++;
-                }
-                else if (gridArray[j][i].getStatus() == FieldConstants.UNFILLED_UNFILLABLE || gridArray[j][i].getStatus() == FieldConstants.FILLED_BY_PLAYER2 || gridArray[j][i].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
-                    inARowPlayer1 = 0;
-                }
-                if (gridArray[j][i].getStatus() == FieldConstants.FILLED_BY_PLAYER2) {
-                    inARowPlayer2++;
-                }
-                else if (gridArray[j][i].getStatus() == FieldConstants.UNFILLED_UNFILLABLE || gridArray[j][i].getStatus() == FieldConstants.FILLED_BY_PLAYER1 || gridArray[j][i].getStatus() == FieldConstants.UNFILLED_FILLABLE) {
                     inARowPlayer2 = 0;
                 }
-                if (inARowPlayer1 == 4) {
-                    winner = WINNER_PLAYER1;
-                    break;
+                else if (currentStatus == FieldConstants.FILLED_BY_PLAYER2) {
+                    inARowPlayer2++;
+                    inARowPlayer1 = 0;
                 }
-                else if (inARowPlayer2 == 4) {
-                    winner = WINNER_PLAYER2;
-                    break;
-                }
+
+                winner = check4InARow(inARowPlayer1, inARowPlayer2);
+            }
+            if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
+                break;
             }
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
         }
         return winner;
+    }
+
+    private int check4InARow(int player1, int player2) {
+        if (player1 == 4) {
+            return WINNER_PLAYER1;
+        } else if (player2 == 4) {
+            return WINNER_PLAYER2;
+        }
+        else {
+            return NO_WINNER;
+        }
     }
 
     public Grid getGrid() {
