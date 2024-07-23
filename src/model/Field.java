@@ -17,6 +17,7 @@ public class Field extends Ellipse2D {
     private double height;
     private FieldStatus status;
     private boolean isHovered;
+    private HoverStatus hover;
 
     public Field() {
         this.x = 0;
@@ -93,5 +94,13 @@ public class Field extends Ellipse2D {
 
     public void setStatus(FieldStatus status) {
         this.status = status;
+    }
+
+    public HoverStatus getHover() {
+        return hover;
+    }
+
+    public void setHover(HoverStatus hover) {
+        this.hover = hover;
     }
 }

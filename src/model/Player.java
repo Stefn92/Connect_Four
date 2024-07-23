@@ -2,24 +2,42 @@ package model;
 
 import java.awt.*;
 
-public class Player {
+public abstract class Player {
 
-    String name;
-    Color chipColor;
-    boolean myTurn;
+    protected String name;
+    protected int playerNumber;
+    protected Color fieldColor;
+    protected boolean myTurn;
 
-    public Player(String name, Color chipColor, boolean myTurn) {
+    protected Player(String name, int playerNumber, Color fieldColor, boolean myTurn) {
         this.name = name;
-        this.chipColor = chipColor;
+        this.playerNumber = playerNumber;
+        this.fieldColor = fieldColor;
         this.myTurn = myTurn;
     }
 
-    public Color getChipColor() {
-        return chipColor;
+    public String getName() {
+        return name;
     }
 
-    public void setChipColor(Color chipColor) {
-        this.chipColor = chipColor;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
+    public Color getFieldColor() {
+        return fieldColor;
+    }
+
+    public void setFieldColor(Color fieldColor) {
+        this.fieldColor = fieldColor;
     }
 
     public boolean isMyTurn() {

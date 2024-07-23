@@ -24,8 +24,8 @@ public class GraphicsFrame extends JFrame {
 
         setContentPane(mainPanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //setSize(1920, 1000);
-        setExtendedState(MAXIMIZED_BOTH);
+        setSize(1300, 1000);
+        //setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setVisible(true);
     }

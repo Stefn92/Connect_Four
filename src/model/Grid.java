@@ -67,18 +67,50 @@ public class Grid {
         }
     }
 
+    public boolean isMouseOverValidField(int x, int y) {
+        boolean isValid = false;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+                Field currentField = getGridArray()[i][j];
+                if (currentField.contains(x, y) && currentField.getStatus() == UNFILLED_FILLABLE) {
+                    isValid = true;
+                    break;
+                }
+            }
+        }
+        return isValid;
+    }
+
     // Gibt bei gültiger Benutzereingabe "True" zurück und ändert den Status des betreffenden Feldes
-    public boolean refreshGrid(int x, int y, FieldStatus filledBy) {
+    public void refreshGrid(int x, int y, FieldStatus filledBy) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 Field currentField = getGridArray()[i][j];
                 if (currentField.contains(x,y) && currentField.getStatus() == UNFILLED_FILLABLE) {
                     currentField.setStatus(filledBy);
-                    return true;
                 }
             }
         }
-        return false;
+    }
+
+    public void refreshHoverStates(int x, int y, HoverStatus status) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+                Field currentField = getGridArray()[i][j];
+                if (currentField.contains(x,y) && currentField.getStatus() == UNFILLED_FILLABLE) {
+                    if (status == HoverStatus.HOVERED_BY_PLAYER1) {
+                        currentField.setHover(HoverStatus.HOVERED_BY_PLAYER1);
+                    }
+                    else if (status == HoverStatus.HOVERED_BY_PLAYER2) {
+                        currentField.setHover(HoverStatus.HOVERED_BY_PLAYER2);
+                    }
+                }
+                else {
+                    currentField.setHovered(false);
+                    currentField.setHover(HoverStatus.NO_HOVER);
+                }
+            }
+        }
     }
 
     // Setzt den Status aller Felder im Grid zurück auf Standard, alle Felder sind leer
