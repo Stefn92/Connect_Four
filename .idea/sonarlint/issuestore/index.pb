@@ -27,8 +27,6 @@ C
 src/model/Grid.java,9\d\9da8f0d38e670a1667f4d998bfc6168c23777413
 I
 src/model/WinChecker.java,6\0\604b4440833147bd77f05c276512dc1dd31ea403
-E
-src/model/Winner.java,d\8\d82188f5a6612cda4346d70b4538c965b3d4b2e2
 K
 src/model/WinnerStatus.java,f\5\f5df3fd72c9e361667a3688a007883839f0399fd
 J

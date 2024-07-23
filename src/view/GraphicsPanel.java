@@ -50,8 +50,19 @@ public class GraphicsPanel extends JPanel {
                     g2d.setColor(Color.YELLOW);
                     g2d.fill(currentField);
                 }
+                if (currentField.getHovered()) {
+                    drawHoveredCircle(currentField, g2d);
+                }
             }
         }
+    }
+
+    private void drawHoveredCircle(Field field, Graphics2D g2d) {
+        int x = (int) field.getX();
+        int y = (int) field.getY();
+        int width = (int) field.getWidth();
+        int height = (int) field.getHeight();
+        g2d.drawOval(x, y, width, height);
     }
 
     public Grid getGrid() {

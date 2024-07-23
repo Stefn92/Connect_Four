@@ -1,13 +1,13 @@
 
 L
-java:S1066N"/Merge this if statement with the enclosing one.(Á¤É8¹ËŞ2
-a
-java:S2184"ECast one of the operands of this subtraction operation to a "double".(‰˜8 ¹ËŞ2
-a
-java:S2184"ECast one of the operands of this subtraction operation to a "double".(‰˜8 ¹ËŞ2
-z	java:S116	"^Rename this field "UNFILLED_UNFILLABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸²ñæ8á¹ËŞ2
-}	java:S116
-"\Rename this field "UNFILLED_FILLABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹é©ßüÿÿÿÿ8á¹ËŞ2
-O
-java:S1135"2Complete the task associated to this TODO comment.(ô®ÇÄ8å¹ËŞ2
-G	java:S106Y"+Replace this use of System.out by a logger.(Æ£îÜ8ë¹ËŞ2
+java:S1066h"/Merge this if statement with the enclosing one.(Á¤É8³×ó€2
+T
+java:S1854)"8Remove this useless assignment to local variable "yPos".(¼ØÇI8Õ×ó€2
+U
+java:S1854("8Remove this useless assignment to local variable "xPos".(á†Ÿ8Õ×ó€2
+F
+java:S1481(")Remove this unused "xPos" local variable.(á†Ÿ8Õ×ó€2
+E
+java:S1481)")Remove this unused "yPos" local variable.(¼ØÇI8Õ×ó€2
+G	java:S106/"+Replace this use of System.out by a logger.(œ€­8Õ×ó€2
+G	java:S106t"+Replace this use of System.out by a logger.(Æ£îÜ8Ø×ó€2

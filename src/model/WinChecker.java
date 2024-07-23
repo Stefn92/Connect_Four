@@ -8,13 +8,13 @@ public class WinChecker {
 
     private Grid grid;
     private Field[][] gridArray;
-    private WinnerStatus WINNER_PLAYER1 = WinnerStatus.WINNER_PLAYER1;
-    private WinnerStatus WINNER_PLAYER2 = WinnerStatus.WINNER_PLAYER2;
-    private WinnerStatus NO_WINNER = WinnerStatus.NO_WINNER;
-    private FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
-    private FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
-    private FieldStatus FILLED_BY_PLAYER1 = FieldStatus.FILLED_BY_PLAYER1;
-    private FieldStatus FILLED_BY_PLAYER2 = FieldStatus.FILLED_BY_PLAYER2;
+    private static final WinnerStatus WINNER_PLAYER1 = WinnerStatus.WINNER_PLAYER1;
+    private static final WinnerStatus WINNER_PLAYER2 = WinnerStatus.WINNER_PLAYER2;
+    private static final WinnerStatus NO_WINNER = WinnerStatus.NO_WINNER;
+    private static final FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
+    private static final FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
+    private static final FieldStatus FILLED_BY_PLAYER1 = FieldStatus.FILLED_BY_PLAYER1;
+    private static final FieldStatus FILLED_BY_PLAYER2 = FieldStatus.FILLED_BY_PLAYER2;
 
     public WinnerStatus detectWinner(Grid grid) {
         this.grid = grid;
