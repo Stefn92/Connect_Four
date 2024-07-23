@@ -4,6 +4,11 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
+/**
+ * Diese Klasse stellt ein einzelnes Feld in einem Bord dar.
+ * Es beinhaltet Attribute wie die Koordinaten, Größe und Status.
+ */
+
 public class Field extends Ellipse2D {
 
     private double x;
@@ -11,14 +16,17 @@ public class Field extends Ellipse2D {
     private double width;
     private double height;
     private FieldStatus status;
+    private boolean isHovered;
 
-    public Field(double width, double height) {
+    public Field() {
         this.x = 0;
         this.y = 0;
-        this.width = width;
-        this.height = height;
+        this.width = 0;
+        this.height = 0;
         this.status = FieldStatus.UNFILLED_UNFILLABLE;
+        this.isHovered = false;
     }
+
     @Override
     public double getX() {
         return x;
@@ -37,6 +45,14 @@ public class Field extends Ellipse2D {
     @Override
     public double getHeight() {
         return height;
+    }
+
+    public void setHovered(boolean isHovered) {
+        this.isHovered = isHovered;
+    }
+
+    public boolean getHovered() {
+        return isHovered;
     }
 
     @Override

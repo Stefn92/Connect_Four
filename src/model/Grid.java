@@ -2,12 +2,18 @@ package model;
 
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Diese Klasse beinhaltet das zweidimensionale Array "gridArray", welches das Spielfeld darstellt.
+ * Außerdem befinden sich hier Methoden, um die Inhalte des "gridArray" zu verändern, wie z.B. die Positionsdaten
+ * oder den aktuellen Status des Feldes.
+ */
+
 public class Grid {
 
     private Rectangle2D.Double field; // Das Rechteck für das Spielfeld
     private Field[][] gridArray; // Array für die Felder im Spielfeld
-    private FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
-    private FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
+    private static final FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
+    private static final FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
 
     public Grid() {
         field = new Rectangle2D.Double();
@@ -17,27 +23,47 @@ public class Grid {
     public void fillGridArray() {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                gridArray[i][j] = new Field(60, 60);
+                gridArray[i][j] = new Field();
             }
         }
     }
 
     // Aktualisiert die Positionsdaten des Rechtecks und der Kreise
-    // TODO: Verbessern und dynamisch machen
-    public void updateGridDimensions(int width, int height) {
-        int xPos = 100;
-        int yPos = 60;
-        field.setRect(xPos, yPos, width - (xPos * 2), height - (yPos * 2));
+    public void updateGridDimensions(int panelWidth, int panelHeight) {
 
-        int yCord = 500;
-        int xCord = 160;
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 6; j++) {
-                gridArray[i][j].setFrame(xCord, yCord, 60, 60);
-                yCord -= 80;
+        updateRectCoordinates(panelWidth, panelHeight);
+        updateEllipseCoordinates();
+    }
+
+    private void updateRectCoordinates(int panelWidth, int panelHeight) {
+
+        int xPos = 50;
+        int yPos = 50;
+        int xPos2 = (panelWidth * 12) / 100;
+        int yPos2 = (panelHeight * 7) / 100;
+        int fieldWidth = panelWidth - (xPos2 * 2);
+        int fieldHeight = panelHeight - (yPos2 * 2);
+        field.setRect(xPos2, yPos2, fieldWidth, fieldHeight);
+        System.out.println("Rechteck: Heigth=" + field.getHeight() + "Width=" + field.getWidth());
+    }
+
+    private void updateEllipseCoordinates() {
+
+        double fieldHeight = field.getHeight();
+        double fieldWidth = field.getWidth();
+        double gap = 30; // Abstand zwischen den Feldern
+        double yDiameter = (fieldHeight - (7 * gap)) / 6; // (Höhe des Rechtecks - (7 * Abstand)) / 6 Felder
+        double xDiameter = (fieldWidth - (8 * gap)) / 7; // (Weite des Rechtecks - (8 * Abstand)) / 7 Felder
+        double xCord = field.getX() + gap;
+        double yCord = field.getY() + gap;
+
+        for (int i = 6; i >= 0; i--) {
+            for (int j = 5; j >= 0; j--) {
+                gridArray[i][j].setFrame(xCord, yCord, xDiameter, yDiameter);
+                yCord += yDiameter + gap;
             }
-            yCord = 500;
-            xCord += 80;
+            yCord = field.getY() + gap;
+            xCord += xDiameter + gap;
         }
     }
 
@@ -81,6 +107,7 @@ public class Grid {
                 }
             }
         }
+        printFieldStates();
     }
 
     public void printFieldStates() {

@@ -27,7 +27,7 @@ public class GUI extends JFrame {
         mainPanel.add(playAgainstComputerButton);
         mainPanel.add(endGameButton);
 
-        setSize(300, 500);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
