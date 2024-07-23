@@ -5,8 +5,6 @@ E
 src/model/Player.java,7\8\782ed9f35e939e57ff64b6dbba409b6d50813ee0
 H
 src/controller/Main.java,3\d\3dcb202b0bd0c3469017a9b30e44c4832a15d7d4
-M
-src/model/FieldConstants.java,0\c\0cebada2cd4c91017bab6da0325b3b0705bc894b
 D
 src/model/Field.java,7\5\758fd453ae2da59414cd5ea7698e31b0d3e26948
 ]
@@ -27,8 +25,6 @@ C
 src/model/Grid.java,9\d\9da8f0d38e670a1667f4d998bfc6168c23777413
 I
 src/model/WinChecker.java,6\0\604b4440833147bd77f05c276512dc1dd31ea403
-E
-src/model/Winner.java,d\8\d82188f5a6612cda4346d70b4538c965b3d4b2e2
 K
 src/model/WinnerStatus.java,f\5\f5df3fd72c9e361667a3688a007883839f0399fd
 J
