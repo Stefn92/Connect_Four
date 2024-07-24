@@ -4,21 +4,19 @@ import model.*;
 import view.GraphicsFrame;
 import view.GraphicsPanel;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class GameController {
 
     private Grid grid;
     private WinChecker winChecker;
-    private ComputerOpponent opponent;
+    private ComputerPlayer opponent;
     private GraphicsFrame gFrame;
     private GraphicsPanel gPanel;
-    private Player player1;
-    private Player player2;
+    private HumanPlayer humanPlayer1;
+    private HumanPlayer humanPlayer2;
 
     public GameController() {
         this.grid = new Grid();
@@ -26,16 +24,17 @@ public class GameController {
         this.gPanel = new GraphicsPanel();
         gPanel.addComponentListener(new ComponentAdapterClass());
         gPanel.addMouseListener(new MouseListenerClass());
+        gPanel.addMouseMotionListener(new MouseMotionListener());
         this.gFrame = new GraphicsFrame(gPanel);
     }
 
     public void startGame(String versus) {
-        player1 = new Player("Player1", Color.RED, true);
+        humanPlayer1 = new HumanPlayer("Player1", 1, Color.RED, true);
         if (versus.equals("Player")) {
-            player2 = new Player("Player2", Color.YELLOW, false);
+            humanPlayer2 = new HumanPlayer("Player2", 2, Color.YELLOW, false);
         }
         else if (versus.equals("Computer")) {
-            opponent = new ComputerOpponent();
+            opponent = new ComputerPlayer("Computer1", 2, Color.BLUE, false);
         }
         calculateGrid();
     }
@@ -88,16 +87,19 @@ public class GameController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            updateFilledBy();
-            boolean refresh = grid.refreshGrid(e.getX(), e.getY(), filledBy);
-            if (refresh) {
-                grid.refreshFieldStates();
-                if (winChecker.detectWinner(grid) == WinnerStatus.WINNER_PLAYER1 || winChecker.detectWinner(grid) == WinnerStatus.WINNER_PLAYER2) {
-                    System.out.println("Es gibt einen Gewinner!");
+            if (SwingUtilities.isLeftMouseButton(e)) {
+                updateFilledBy();
+                boolean refresh = grid.isMouseOverValidField(e.getX(), e.getY());
+                if (refresh) {
+                    grid.refreshGrid(e.getX(), e.getY(), filledBy);
+                    grid.refreshFieldStates();
+                    if (winChecker.detectWinner(grid) == WinnerStatus.WINNER_PLAYER1 || winChecker.detectWinner(grid) == WinnerStatus.WINNER_PLAYER2) {
+                        System.out.println("Es gibt einen Gewinner!");
+                    }
+                    gPanel.setGrid(grid);
+                    updateMyTurn();
+                    gPanel.repaint();
                 }
-                gPanel.setGrid(grid);
-                updateMyTurn();
-                gPanel.repaint();
             }
         }
 
@@ -122,7 +124,7 @@ public class GameController {
         }
 
         public void updateFilledBy() {
-            if (player1.isMyTurn()) {
+            if (humanPlayer1.isMyTurn()) {
                 filledBy = FieldStatus.FILLED_BY_PLAYER1;
             }
             else {
@@ -131,14 +133,33 @@ public class GameController {
         }
 
         public void updateMyTurn() {
-            if (player1.isMyTurn()) {
-                player1.setMyTurn(false);
-                player2.setMyTurn(true);
+            if (humanPlayer1.isMyTurn()) {
+                humanPlayer1.setMyTurn(false);
+                humanPlayer2.setMyTurn(true);
             }
             else {
-                player2.setMyTurn(false);
-                player1.setMyTurn(true);
+                humanPlayer2.setMyTurn(false);
+                humanPlayer1.setMyTurn(true);
             }
+        }
+    }
+
+    class MouseMotionListener implements java.awt.event.MouseMotionListener {
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            // Wird nicht gebraucht
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            if (humanPlayer1.isMyTurn()) {
+                grid.refreshHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
+            }
+            else if (humanPlayer2.isMyTurn()) {
+                grid.refreshHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
+            }
+            gPanel.repaint();
         }
     }
 }

@@ -83,3 +83,11 @@ w
 G.idea/sonarlint/issuestore/e/c/ec0d6cd1af1132eb2b630443ee9bf9875e15746b,9\f\9f0d09f85673bc680318d83da002554b7c2e8856
 Å
 Q.idea/sonarlint/securityhotspotstore/e/c/ec0d6cd1af1132eb2b630443ee9bf9875e15746b,f\b\fb5e3fc5c405100eda04e1a496bce1036151d9c6
+J
+src/model/HoverStatus.java,2\d\2d9b66576e1de2e2060bab37351e640e383b9b0d
+J
+src/model/HumanPlayer.java,6\3\6341ab9bb2091ba88eb0d5d4ab426329a29d7e9a
+O
+src/model/ComputerOpponent.java,f\8\f802094d88a2c4460a2f9fc019d85f7c695bfcbd
+M
+src/model/ComputerPlayer.java,f\d\fddbed3e45c216582a5d6eaa2a21a4daf729e062

@@ -3,6 +3,7 @@ package view;
 import model.Field;
 import model.FieldStatus;
 import model.Grid;
+import model.HoverStatus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class GraphicsPanel extends JPanel {
                     g2d.setColor(Color.YELLOW);
                     g2d.fill(currentField);
                 }
-                if (currentField.getHovered()) {
+                if (currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER1 || currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
                     drawHoveredCircle(currentField, g2d);
                 }
             }
@@ -62,6 +63,14 @@ public class GraphicsPanel extends JPanel {
         int y = (int) field.getY();
         int width = (int) field.getWidth();
         int height = (int) field.getHeight();
+
+        if (field.getHover() == HoverStatus.HOVERED_BY_PLAYER1) {
+            g2d.setColor(Color.RED);
+        } else if (field.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
+            g2d.setColor(Color.YELLOW);
+
+        }
+        g2d.setStroke(new BasicStroke(4));
         g2d.drawOval(x, y, width, height);
     }
 
