@@ -1,8 +1,6 @@
 
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-M
-src/model/FieldConstants.java,0\c\0cebada2cd4c91017bab6da0325b3b0705bc894b
 D
 src/model/Field.java,7\5\758fd453ae2da59414cd5ea7698e31b0d3e26948
 H
@@ -78,13 +76,9 @@ Q.idea/sonarlint/securityhotspotstore/2/d/2de081932da1fd2e00150bd2bd5dbce3a0a635
 Å
 Q.idea/sonarlint/securityhotspotstore/f/5/f5df3fd72c9e361667a3688a007883839f0399fd,5\7\574c400993d009807c65bb523dd02518c4d2fd95
 w
-G.idea/sonarlint/issuestore/d/8/d82188f5a6612cda4346d70b4538c965b3d4b2e2,b\3\b3f83295aca495a5973ff2a19b7f67f6c2cda6c2
-w
 G.idea/sonarlint/issuestore/2/d/2de081932da1fd2e00150bd2bd5dbce3a0a6351a,d\9\d93fe1136e7d0ce35ebef7144227caf99c5c90e1
 w
 G.idea/sonarlint/issuestore/f/5/f5df3fd72c9e361667a3688a007883839f0399fd,f\8\f8e36076d7686520ea0cd28c3528eb3101bdd177
-Å
-Q.idea/sonarlint/securityhotspotstore/d/8/d82188f5a6612cda4346d70b4538c965b3d4b2e2,3\8\38959667ecada5bb21d473900a9911be1e9f3207
 w
 G.idea/sonarlint/issuestore/e/c/ec0d6cd1af1132eb2b630443ee9bf9875e15746b,9\f\9f0d09f85673bc680318d83da002554b7c2e8856
 Å
