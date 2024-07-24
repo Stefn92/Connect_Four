@@ -1,4 +1,11 @@
 
-u	java:S135,"YReduce the total number of break and continue statements in this loop to use at most one.(Ô¿¼Î8úÌ½ß2
-o
-java:S3776$"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(áüğ–8±Ï½ß2
+N
+java:S1481h"2Remove this unused "inARowPlayer1" local variable.(äùŠ8Ëğİ«2
+O
+java:S1481i"2Remove this unused "inARowPlayer2" local variable.(áë×8çûŞ«2
+S
+java:S1068"7Remove this unused "UNFILLED_UNFILLABLE" private field.(é—í8œçÖ«2
+R
+java:S1068"5Remove this unused "UNFILLED_FILLABLE" private field.(æø¸¿8œçÖ«2
+V
+java:S1144d"9Remove this unused private "detectDiagonalWinner" method.(¯·ó›8œçÖ«2

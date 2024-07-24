@@ -16,8 +16,8 @@ public class Field extends Ellipse2D {
     private double width;
     private double height;
     private FieldStatus status;
-    private boolean isHovered;
     private HoverStatus hover;
+    private boolean isWinning;
 
     public Field() {
         this.x = 0;
@@ -25,7 +25,7 @@ public class Field extends Ellipse2D {
         this.width = 0;
         this.height = 0;
         this.status = FieldStatus.UNFILLED_UNFILLABLE;
-        this.isHovered = false;
+        this.hover = HoverStatus.NO_HOVER;
     }
 
     @Override
@@ -46,14 +46,6 @@ public class Field extends Ellipse2D {
     @Override
     public double getHeight() {
         return height;
-    }
-
-    public void setHovered(boolean isHovered) {
-        this.isHovered = isHovered;
-    }
-
-    public boolean getHovered() {
-        return isHovered;
     }
 
     @Override
@@ -102,5 +94,13 @@ public class Field extends Ellipse2D {
 
     public void setHover(HoverStatus hover) {
         this.hover = hover;
+    }
+
+    public boolean isWinning() {
+        return isWinning;
+    }
+
+    public void setWinning(boolean winning) {
+        isWinning = winning;
     }
 }

@@ -106,7 +106,6 @@ public class Grid {
                     }
                 }
                 else {
-                    currentField.setHovered(false);
                     currentField.setHover(HoverStatus.NO_HOVER);
                 }
             }
