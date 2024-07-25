@@ -13,11 +13,13 @@ public class GraphicsPanel extends JPanel {
     private transient Grid grid;
     private final Color red;
     private final Color yellow;
+    Field lastHovered;
 
     public GraphicsPanel() {
         setBackground(Color.WHITE);
         red = Color.RED;
         yellow = Color.YELLOW;
+        lastHovered = new Field();
     }
 
     @Override
@@ -40,6 +42,7 @@ public class GraphicsPanel extends JPanel {
             }
         }
 
+
         // Färbt die Kreise je nach Status ein
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
@@ -59,6 +62,10 @@ public class GraphicsPanel extends JPanel {
                     drawHoveredCircle(currentField, g2d);
                     Cursor currentCursor = new Cursor(Cursor.HAND_CURSOR);
                     setCursor(currentCursor);
+                    lastHovered = currentField;
+                }
+                if (lastHovered.getHover() == HoverStatus.NO_HOVER) {
+                    setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 }
             }
         }
