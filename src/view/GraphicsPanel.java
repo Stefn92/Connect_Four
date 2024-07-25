@@ -57,6 +57,8 @@ public class GraphicsPanel extends JPanel {
                 }
                 if (currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER1 || currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
                     drawHoveredCircle(currentField, g2d);
+                    Cursor currentCursor = new Cursor(Cursor.HAND_CURSOR);
+                    setCursor(currentCursor);
                 }
             }
         }

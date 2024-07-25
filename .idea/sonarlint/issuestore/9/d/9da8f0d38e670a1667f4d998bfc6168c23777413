@@ -1,6 +1,6 @@
 
 M
-java:S1066‡"/Merge this if statement with the enclosing one.(Á¤É8³×ó€2
+java:S1066‰"/Merge this if statement with the enclosing one.(Á¤É8³×ó€2
 T
 java:S1854)"8Remove this useless assignment to local variable "yPos".(¼ØÇI8Õ×ó€2
 U
@@ -10,4 +10,4 @@ java:S1481(")Remove this unused "xPos" local variable.(á†Ÿ8Õ×ó€2
 E
 java:S1481)")Remove this unused "yPos" local variable.(¼ØÇI8Õ×ó€2
 G	java:S106/"+Replace this use of System.out by a logger.(œ€­8Õ×ó€2
-H	java:S106“"+Replace this use of System.out by a logger.(Æ£îÜ8Ø×ó€2
+H	java:S106•"+Replace this use of System.out by a logger.(Æ£îÜ8Ø×ó€2

@@ -58,8 +58,6 @@ G.idea/sonarlint/issuestore/7/8/782ed9f35e939e57ff64b6dbba409b6d50813ee0,6\d\6d
 w
 G.idea/sonarlint/issuestore/7/c/7ca95aca356c0d8c5dbf2e95fafd74fd53ed4db5,1\8\18252cd91c5aad7cdba106d08c49fa0c7d201a11
 Å
-Q.idea/sonarlint/securityhotspotstore/0/c/0cebada2cd4c91017bab6da0325b3b0705bc894b,5\0\50337350550a98f1916fdf06e7c5d3c22b743c23
-Å
 Q.idea/sonarlint/securityhotspotstore/3/d/3dcb202b0bd0c3469017a9b30e44c4832a15d7d4,b\c\bc0b9dccb599f33b3f644e13d16143a277004c13
 Å
 Q.idea/sonarlint/securityhotspotstore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d,1\0\10a03f31c4dce92cb371e761ce9429428bb6c176
@@ -87,7 +85,5 @@ J
 src/model/HoverStatus.java,2\d\2d9b66576e1de2e2060bab37351e640e383b9b0d
 J
 src/model/HumanPlayer.java,6\3\6341ab9bb2091ba88eb0d5d4ab426329a29d7e9a
-O
-src/model/ComputerOpponent.java,f\8\f802094d88a2c4460a2f9fc019d85f7c695bfcbd
 M
 src/model/ComputerPlayer.java,f\d\fddbed3e45c216582a5d6eaa2a21a4daf729e062
