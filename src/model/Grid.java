@@ -67,6 +67,7 @@ public class Grid {
         }
     }
 
+    // Prüft, ob die Maus über einem Feld ist und ob es gefüllt werden kann
     public boolean isMouseOverValidField(int x, int y) {
         boolean isValid = false;
         for (int i = 0; i < 7; i++) {
@@ -81,7 +82,7 @@ public class Grid {
         return isValid;
     }
 
-    // Gibt bei gültiger Benutzereingabe "True" zurück und ändert den Status des betreffenden Feldes
+    // Verändert den Status des Feldes
     public void refreshGrid(int x, int y, FieldStatus filledBy) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
@@ -93,6 +94,7 @@ public class Grid {
         }
     }
 
+    // Aktualisiert den HoverStatus aller Felder, je nachdem wo die Maus gerade ist
     public void refreshHoverStates(int x, int y, HoverStatus status) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
@@ -106,7 +108,6 @@ public class Grid {
                     }
                 }
                 else {
-                    currentField.setHovered(false);
                     currentField.setHover(HoverStatus.NO_HOVER);
                 }
             }

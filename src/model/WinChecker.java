@@ -22,10 +22,11 @@ public class WinChecker {
 
         WinnerStatus result1 = detectVerticalWinner();
         WinnerStatus result2 = detectHorizontalWinner();
+        WinnerStatus result3 = detectDiagonalWinner();
 
-        if (result1 == WINNER_PLAYER1 || result2 == WINNER_PLAYER1) {
+        if (result1 == WINNER_PLAYER1 || result2 == WINNER_PLAYER1 || result3 == WinnerStatus.WINNER_PLAYER1) {
             return WINNER_PLAYER1;
-        } else if (result1 == WINNER_PLAYER2 || result2 == WINNER_PLAYER2) {
+        } else if (result1 == WINNER_PLAYER2 || result2 == WINNER_PLAYER2 || result3 == WinnerStatus.WINNER_PLAYER2) {
             return WINNER_PLAYER2;
         }
         else {
@@ -42,26 +43,22 @@ public class WinChecker {
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                if (gridArray[i][j].getStatus() == FILLED_BY_PLAYER1) {
+
+                FieldStatus currentStatus = gridArray[i][j].getStatus();
+
+                if (currentStatus == FILLED_BY_PLAYER1) {
                     inARowPlayer1++;
-                }
-                else if (gridArray[i][j].getStatus() == UNFILLED_UNFILLABLE || gridArray[i][j].getStatus() == FILLED_BY_PLAYER2 || gridArray[i][j].getStatus() == UNFILLED_FILLABLE) {
-                    inARowPlayer1 = 0;
-                }
-                if (gridArray[i][j].getStatus() == FILLED_BY_PLAYER2) {
-                    inARowPlayer2++;
-                }
-                else if (gridArray[i][j].getStatus() == UNFILLED_UNFILLABLE || gridArray[i][j].getStatus() == FILLED_BY_PLAYER1 || gridArray[i][j].getStatus() == UNFILLED_FILLABLE) {
                     inARowPlayer2 = 0;
                 }
-                if (inARowPlayer1 == 4) {
-                    winner = WINNER_PLAYER1;
-                    break;
+                else if (currentStatus == FILLED_BY_PLAYER2) {
+                    inARowPlayer2++;
+                    inARowPlayer1 = 0;
                 }
-                else if (inARowPlayer2 == 4) {
-                    winner = WINNER_PLAYER2;
-                    break;
-                }
+
+                winner = check4InARow(inARowPlayer1, inARowPlayer2);
+            }
+            if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
+                break;
             }
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
@@ -98,6 +95,34 @@ public class WinChecker {
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
         }
+        return winner;
+    }
+
+    private WinnerStatus detectDiagonalWinner() {
+
+        WinnerStatus winner = NO_WINNER;
+
+        int inARowPlayer1 = 0;
+        int inARowPlayer2 = 0;
+
+        int[] fieldLength = {4, 5, 6, 6, 5, 4};
+
+        int ROWS = 6;
+        int COLS = 7;
+        int WIN_COUNT = 4;
+
+        for (int row = 0; row <= ROWS - WIN_COUNT; row++) {
+            for (int col = 0; col <= COLS - WIN_COUNT; col++) {
+                if (gridArray[row][col].getStatus() == FILLED_BY_PLAYER1 &&
+                        gridArray[row + 1][col + 1].getStatus() == FILLED_BY_PLAYER1 &&
+                        gridArray[row + 2][col + 2].getStatus() == FILLED_BY_PLAYER1 &&
+                        gridArray[row + 3][col + 3].getStatus() == FILLED_BY_PLAYER1) {
+                    winner = WinnerStatus.WINNER_PLAYER1;
+                    break;
+                }
+            }
+        }
+
         return winner;
     }
 

@@ -11,9 +11,13 @@ import java.awt.*;
 public class GraphicsPanel extends JPanel {
 
     private transient Grid grid;
+    private final Color red;
+    private final Color yellow;
 
     public GraphicsPanel() {
         setBackground(Color.WHITE);
+        red = Color.RED;
+        yellow = Color.YELLOW;
     }
 
     @Override
@@ -44,30 +48,34 @@ public class GraphicsPanel extends JPanel {
                 FieldStatus currentStatus = grid.getGridArray()[i][j].getStatus();
 
                 if (currentStatus == FieldStatus.FILLED_BY_PLAYER1) {
-                    g2d.setColor(Color.RED);
+                    g2d.setColor(red);
                     g2d.fill(currentField);
                 }
                 else if (currentStatus == FieldStatus.FILLED_BY_PLAYER2) {
-                    g2d.setColor(Color.YELLOW);
+                    g2d.setColor(yellow);
                     g2d.fill(currentField);
                 }
                 if (currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER1 || currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
                     drawHoveredCircle(currentField, g2d);
+                    Cursor currentCursor = new Cursor(Cursor.HAND_CURSOR);
+                    setCursor(currentCursor);
                 }
             }
         }
     }
 
+    // Zeichnet eine Umrandung um das Feld ein, wenn die Maus darüber hovert
     private void drawHoveredCircle(Field field, Graphics2D g2d) {
+
         int x = (int) field.getX();
         int y = (int) field.getY();
         int width = (int) field.getWidth();
         int height = (int) field.getHeight();
 
         if (field.getHover() == HoverStatus.HOVERED_BY_PLAYER1) {
-            g2d.setColor(Color.RED);
+            g2d.setColor(red);
         } else if (field.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
-            g2d.setColor(Color.YELLOW);
+            g2d.setColor(yellow);
 
         }
         g2d.setStroke(new BasicStroke(4));
