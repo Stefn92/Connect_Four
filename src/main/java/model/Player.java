@@ -47,4 +47,15 @@ public abstract class Player {
     public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
     }
+
+    public FieldStatus getFieldStatus() {
+        if (playerNumber == 1) {
+            return FieldStatus.FILLED_BY_PLAYER1;
+        } else if (playerNumber == 2) {
+            return FieldStatus.FILLED_BY_PLAYER2;
+        }
+        else {
+            return null;
+        }
+    }
 }

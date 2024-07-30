@@ -58,7 +58,7 @@ public class GraphicsPanel extends JPanel {
                     g2d.fill(currentField);
                 }
                 if (currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER1 || currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
-                    drawHoveredCircle(currentField, g2d);
+                    drawCircleOverHoveredField(currentField, g2d);
                     Cursor currentCursor = new Cursor(Cursor.HAND_CURSOR);
                     setCursor(currentCursor);
                     lastHovered = currentField;
@@ -71,25 +71,21 @@ public class GraphicsPanel extends JPanel {
     }
 
     // Zeichnet eine Umrandung um das Feld ein, wenn die Maus darüber hovert
-    private void drawHoveredCircle(Field field, Graphics2D g2d) {
+    private void drawCircleOverHoveredField(Field hoveredField, Graphics2D g2d) {
 
-        int x = (int) field.getX();
-        int y = (int) field.getY();
-        int width = (int) field.getWidth();
-        int height = (int) field.getHeight();
+        int x = (int) hoveredField.getX();
+        int y = (int) hoveredField.getY();
+        int width = (int) hoveredField.getWidth();
+        int height = (int) hoveredField.getHeight();
 
-        if (field.getHover() == HoverStatus.HOVERED_BY_PLAYER1) {
+        if (hoveredField.getHover() == HoverStatus.HOVERED_BY_PLAYER1) {
             g2d.setColor(red);
-        } else if (field.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
+        } else if (hoveredField.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
             g2d.setColor(yellow);
 
         }
         g2d.setStroke(new BasicStroke(4));
         g2d.drawOval(x, y, width, height);
-    }
-
-    public Grid getGrid() {
-        return grid;
     }
 
     public void setGrid(Grid grid) {

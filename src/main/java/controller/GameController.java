@@ -11,7 +11,6 @@ import java.awt.event.*;
 public class GameController {
 
     private Grid grid;
-    private WinChecker winChecker;
     private ComputerPlayer opponent;
     private GraphicsFrame gFrame;
     private GraphicsPanel gPanel;
@@ -21,9 +20,9 @@ public class GameController {
     public GameController() {
         this.grid = new Grid();
         this.gPanel = new GraphicsPanel();
-        gPanel.addComponentListener(new ComponentAdapterClass());
-        gPanel.addMouseListener(new MouseListenerClass());
-        gPanel.addMouseMotionListener(new MouseMotionListener());
+        gPanel.addComponentListener(new ResizeListener());
+        gPanel.addMouseListener(new ClickListener());
+        gPanel.addMouseMotionListener(new HoverListener());
         this.gFrame = new GraphicsFrame(gPanel);
     }
 
@@ -50,31 +49,16 @@ public class GameController {
         gPanel.setGrid(grid);
     }
 
-    class ComponentAdapterClass implements ComponentListener {
+    class ResizeListener extends ComponentAdapter {
 
         @Override
         public void componentResized(ComponentEvent e) {
             grid.updateGridDimensions(gPanel.getWidth(), gPanel.getHeight());
             gPanel.setGrid(grid);
         }
-
-        @Override
-        public void componentMoved(ComponentEvent e) {
-            // Wird nicht gebraucht
-        }
-
-        @Override
-        public void componentShown(ComponentEvent e) {
-            // Wird nicht gebraucht
-        }
-
-        @Override
-        public void componentHidden(ComponentEvent e) {
-            // Wird nicht gebraucht
-        }
     }
 
-    class MouseListenerClass implements MouseListener {
+    class ClickListener extends MouseAdapter {
 
         FieldStatus filledBy;
 
@@ -95,26 +79,6 @@ public class GameController {
                     updateMyTurn();
                 }
             }
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            // Wird nicht gebraucht
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            // Wird nicht gebraucht
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            // Wird nicht gebraucht
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            // Wird nicht gebraucht
         }
 
         public void updateFilledBy() {
@@ -138,12 +102,7 @@ public class GameController {
         }
     }
 
-    class MouseMotionListener implements java.awt.event.MouseMotionListener {
-
-        @Override
-        public void mouseDragged(MouseEvent e) {
-            // Wird nicht gebraucht
-        }
+    class HoverListener extends MouseMotionAdapter {
 
         @Override
         public void mouseMoved(MouseEvent e) {

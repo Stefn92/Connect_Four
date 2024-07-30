@@ -82,6 +82,26 @@ public class Grid {
         return isValid;
     }
 
+    public void makeTurn(int xCord, int yCord, Player currentPlayer) throws RuntimeException {
+        if (!isMouseOverValidField(xCord, yCord)) {
+            throw new RuntimeException();
+        }
+        else {
+            fillField(xCord, yCord, currentPlayer);
+        }
+    }
+
+    private void fillField(int xCord, int yCord, Player currentPlayer) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+                Field currentField = getGridArray()[i][j];
+                if (currentField.contains(xCord, yCord)) {
+                    currentField.setStatus(currentPlayer.getFieldStatus());
+                }
+            }
+        }
+    }
+
     // Verändert den Status des Feldes
     public void refreshGrid(int x, int y, FieldStatus filledBy) {
         for (int i = 0; i < 7; i++) {
@@ -146,7 +166,7 @@ public class Grid {
     public void printFieldStates() {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                System.out.println("i = " + i + " j = " + j + " Status = " + getGridArray()[i][j].getStatus());
+                System.out.println("ROW = " + i + " COL = " + j + " Status = " + getGridArray()[i][j].getStatus());
             }
         }
     }

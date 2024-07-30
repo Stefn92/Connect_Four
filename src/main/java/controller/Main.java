@@ -19,8 +19,6 @@ public class Main {
     public Main() {
         gui = new GUI();
         gui.addRestartAgainstPlayerListener(new PlayAgainstPlayerClass());
-        //gc = new GameController();
-        //gc.startGame();
     }
 
     class PlayAgainstPlayerClass implements ActionListener {

@@ -20,13 +20,13 @@ public class WinChecker {
     public static WinnerStatus detectWinner(Grid newGrid) {
         gridArray = newGrid.getGridArray();
 
-        WinnerStatus result1 = detectVerticalWinner();
-        WinnerStatus result2 = detectHorizontalWinner();
-        WinnerStatus result3 = detectDiagonalWinner();
+        WinnerStatus verticalWinnerStatus = detectVerticalWinner();
+        WinnerStatus horizontalWinnerStatus = detectHorizontalWinner();
+        WinnerStatus diagonalWinnerStatus = detectDiagonalWinner();
 
-        if (result1 == WINNER_PLAYER1 || result2 == WINNER_PLAYER1 || result3 == WinnerStatus.WINNER_PLAYER1) {
+        if (verticalWinnerStatus == WINNER_PLAYER1 || horizontalWinnerStatus == WINNER_PLAYER1 || diagonalWinnerStatus == WinnerStatus.WINNER_PLAYER1) {
             return WINNER_PLAYER1;
-        } else if (result1 == WINNER_PLAYER2 || result2 == WINNER_PLAYER2 || result3 == WinnerStatus.WINNER_PLAYER2) {
+        } else if (verticalWinnerStatus == WINNER_PLAYER2 || horizontalWinnerStatus == WINNER_PLAYER2 || diagonalWinnerStatus == WinnerStatus.WINNER_PLAYER2) {
             return WINNER_PLAYER2;
         }
         else {
