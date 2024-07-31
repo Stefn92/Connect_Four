@@ -11,11 +11,11 @@ import java.awt.event.*;
 public class GameController {
 
     private Grid grid;
-    private ComputerPlayer opponent;
-    private GraphicsFrame gFrame;
     private GraphicsPanel gPanel;
+    private GraphicsFrame gFrame;
     private Player player1;
     private Player player2;
+    private GameStateMachine stateMachine;
 
     public GameController() {
         this.grid = new Grid();
@@ -24,9 +24,11 @@ public class GameController {
         gPanel.addMouseListener(new ClickListener());
         gPanel.addMouseMotionListener(new HoverListener());
         this.gFrame = new GraphicsFrame(gPanel);
+        this.stateMachine = new GameStateMachine();
     }
 
     public void startGame(Player player) {
+        stateMachine.handleEvent(GameEvent.START_GAME);
         player1 = new HumanPlayer("Player1", 1, Color.RED, true);
         player2 = player;
 
@@ -38,6 +40,7 @@ public class GameController {
     }
 
     public void restartGame() {
+        stateMachine.handleEvent(GameEvent.RESTART_GAME);
         // TODO
     }
 
@@ -69,6 +72,7 @@ public class GameController {
                 updateFilledBy();
                 boolean refresh = grid.isMouseOverValidField(e.getX(), e.getY());
                 if (refresh) {
+                    stateMachine.handleEvent(GameEvent.PLAYER1_MOVED);
                     grid.refreshGrid(e.getX(), e.getY(), filledBy);
                     grid.refreshFieldStates();
                     WinnerStatus winnerStatus = WinChecker.detectWinner(grid);

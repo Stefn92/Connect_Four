@@ -61,3 +61,5 @@ T
 $src/main/java/model/HoverStatus.java,4\7\476b6512d62218533bd489cd5676f35a9d5804bc
 U
 %src/main/java/model/WinnerStatus.java,b\4\b47074bc431826b07c576ef283cee6bad960d2d8
+Y
+)src/main/java/model/GameStateMachine.java,6\6\660bcf6a579d117f37a5d7e4a740fa68d3af84fa
