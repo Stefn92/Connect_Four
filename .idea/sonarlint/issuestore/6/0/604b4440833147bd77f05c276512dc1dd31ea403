@@ -1,16 +1,0 @@
-
-r	java:S117n"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×÷øÍúÿÿÿÿ8€¹¹Ô2
-m	java:S117o"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚¬´8€¹¹Ô2
-m	java:S117p"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û¯¯Ï8€¹¹Ô2
-a
-java:S1854l"?Remove this useless assignment to local variable "fieldLength".(±¢‘üÿÿÿÿ8Ê¹¹Ô2
-N
-java:S1481i"2Remove this unused "inARowPlayer1" local variable.(äùŠ8Ë¹¹Ô2
-O
-java:S1481j"2Remove this unused "inARowPlayer2" local variable.(áë×8Ë¹¹Ô2
-R
-java:S1481l"0Remove this unused "fieldLength" local variable.(±¢‘üÿÿÿÿ8Ë¹¹Ô2
-S
-java:S1068"7Remove this unused "UNFILLED_UNFILLABLE" private field.(é—í8Î¹¹Ô2
-R
-java:S1068"5Remove this unused "UNFILLED_FILLABLE" private field.(æø¸¿8Î¹¹Ô2
