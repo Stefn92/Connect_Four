@@ -63,3 +63,5 @@ U
 %src/main/java/model/WinnerStatus.java,b\4\b47074bc431826b07c576ef283cee6bad960d2d8
 Y
 )src/main/java/model/GameStateMachine.java,6\6\660bcf6a579d117f37a5d7e4a740fa68d3af84fa
+T
+$src/main/java/view/GridRenderer.java,d\4\d476bec23575ef4970ce23ad02986723bbc6d0e8

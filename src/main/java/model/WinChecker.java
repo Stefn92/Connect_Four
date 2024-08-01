@@ -17,8 +17,8 @@ public class WinChecker {
 
     private WinChecker() {}
 
-    public static WinnerStatus detectWinner(Grid newGrid) {
-        gridArray = newGrid.getGridArray();
+    public static WinnerStatus detectWinner(Field[][] grid) {
+        gridArray = grid;
 
         WinnerStatus verticalWinnerStatus = detectVerticalWinner();
         WinnerStatus horizontalWinnerStatus = detectHorizontalWinner();

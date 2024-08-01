@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class GraphicsFrame extends JFrame {
 
-    GraphicsPanel gPanel;
+    GridRenderer gPanel;
     JPanel northPanel;
     JPanel mainPanel;
 
-    public GraphicsFrame(GraphicsPanel gPanel) {
+    public GraphicsFrame(GridRenderer gPanel) {
 
         this.gPanel = gPanel;
 

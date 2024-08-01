@@ -37,13 +37,11 @@ public class Grid {
 
     private void updateRectCoordinates(int panelWidth, int panelHeight) {
 
-        int xPos = 50;
-        int yPos = 50;
-        int xPos2 = (panelWidth * 12) / 100;
-        int yPos2 = (panelHeight * 7) / 100;
-        int fieldWidth = panelWidth - (xPos2 * 2);
-        int fieldHeight = panelHeight - (yPos2 * 2);
-        field.setRect(xPos2, yPos2, fieldWidth, fieldHeight);
+        int xPos = (panelWidth * 12) / 100;
+        int yPos = (panelHeight * 7) / 100;
+        int fieldWidth = panelWidth - (xPos * 2);
+        int fieldHeight = panelHeight - (yPos * 2);
+        field.setRect(xPos, yPos, fieldWidth, fieldHeight);
         System.out.println("Rechteck: Heigth=" + field.getHeight() + "Width=" + field.getWidth());
     }
 
@@ -115,7 +113,7 @@ public class Grid {
     }
 
     // Aktualisiert den HoverStatus aller Felder, je nachdem wo die Maus gerade ist
-    public void refreshHoverStates(int x, int y, HoverStatus status) {
+    public void updateHoverStates(int x, int y, HoverStatus status) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 Field currentField = getGridArray()[i][j];
@@ -150,7 +148,7 @@ public class Grid {
     }
 
     // Aktualisiert die Status der Felder
-    public void refreshFieldStates() {
+    public void updateFieldStates() {
         for (int i = 0; i < 7; i++) {
             for (int j = 1; j < 6; j++) {
                 if (getGridArray()[i][j].getStatus() == UNFILLED_UNFILLABLE) {

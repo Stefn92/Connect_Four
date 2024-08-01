@@ -2,28 +2,32 @@ package controller;
 
 import model.*;
 import view.GraphicsFrame;
-import view.GraphicsPanel;
+import view.GridRenderer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 
 public class GameController {
 
-    private Grid grid;
-    private GraphicsPanel gPanel;
+    private final Grid grid;
+    private GridRenderer gridRenderer;
     private GraphicsFrame gFrame;
     private Player player1;
     private Player player2;
-    private GameStateMachine stateMachine;
+    private Player currentPlayer;
+    private final GameStateMachine stateMachine;
+    private Point currentMouseClick;
 
     public GameController() {
         this.grid = new Grid();
-        this.gPanel = new GraphicsPanel();
-        gPanel.addComponentListener(new ResizeListener());
-        gPanel.addMouseListener(new ClickListener());
-        gPanel.addMouseMotionListener(new HoverListener());
-        this.gFrame = new GraphicsFrame(gPanel);
+        this.gridRenderer = new GridRenderer();
+        gridRenderer.addMouseListener(new ClickListener());
+        //gridRenderer.addMouseMotionListener(new HoverListener());
+        setupMouseHoverListener();
+        setupResizeListener();
+        this.gFrame = new GraphicsFrame(gridRenderer);
         this.stateMachine = new GameStateMachine();
     }
 
@@ -46,18 +50,110 @@ public class GameController {
 
     public void calculateGrid() {
         grid.fillGridArray();
-        grid.updateGridDimensions(gPanel.getWidth(), gPanel.getHeight());
+        grid.updateGridDimensions(gridRenderer.getWidth(), gridRenderer.getHeight());
         grid.resetFieldStates();
-        grid.refreshFieldStates();
-        gPanel.setGrid(grid);
+        grid.updateFieldStates();
+        updateView();
     }
 
-    class ResizeListener extends ComponentAdapter {
+    public void updateView() {
+        Field[][] gridArray = grid.getGridArray();
+        gridRenderer.setGridAndRepaint(gridArray);
+        Rectangle2D.Double rect = grid.getField();
+        gridRenderer.setRectAndRepaint(rect);
+    }
 
-        @Override
-        public void componentResized(ComponentEvent e) {
-            grid.updateGridDimensions(gPanel.getWidth(), gPanel.getHeight());
-            gPanel.setGrid(grid);
+    public void setupMouseListener() {
+        this.gridRenderer.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Mausklick
+            }
+        });
+    }
+
+    public void setupResizeListener() {
+        this.gridRenderer.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int width = gridRenderer.getWidth();
+                int height = gridRenderer.getHeight();
+                grid.updateGridDimensions(width, height);
+                updateView();
+            }
+        });
+    }
+
+    public void setupMouseHoverListener() {
+        this.gridRenderer.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                GameState currentState = stateMachine.getCurrentGameState();
+                if (currentState == GameState.PLAYER1_TURN) {
+                    grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
+                }
+                else if (currentState == GameState.PLAYER2_TURN) {
+                    grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
+                }
+                updateView();
+            }
+        });
+    }
+
+    public void turn() {
+        GameState currentGameState = stateMachine.getCurrentGameState();
+        switch (currentGameState) {
+            case PLAYER1_TURN:
+                // Wait For valid MouseClick
+                currentPlayer = player1;
+                break;
+            case PLAYER2_TURN:
+                // Wait for valid MouseClick
+                currentPlayer = player2;
+                //stateMachine.handleEvent(GameEvent.PLAYER2_MOVED);
+                break;
+            case GAME_OVER:
+                // Do Stuff
+                stateMachine.handleEvent(GameEvent.RESTART_GAME);
+                break;
+        }
+    }
+
+    public void player1Move() {
+        if (stateMachine.getCurrentGameState() == GameState.PLAYER1_TURN) {
+            // Logik für Zug
+
+
+            stateMachine.handleEvent(GameEvent.PLAYER1_MOVED);
+        }
+    }
+
+    public void checkForWinner() {
+        Field[][] gridArray = grid.getGridArray();
+        WinnerStatus winnerStatus = WinChecker.detectWinner(gridArray);
+        if (winnerStatus == WinnerStatus.WINNER_PLAYER1 || winnerStatus == WinnerStatus.WINNER_PLAYER2) {
+            System.out.println("Es gibt einen Gewinner!");
+            stateMachine.changeState(GameState.GAME_OVER);
+        }
+    }
+
+    public void handleMouseClick() {
+        turn();
+        int x = (int) currentMouseClick.getX();
+        int y = (int) currentMouseClick.getY();
+        if (grid.isMouseOverValidField(x,y)) {
+            grid.makeTurn(x, y, currentPlayer);
+            //grid.refreshGrid(x, y, filledBy);
+            grid.updateFieldStates();
+            checkForWinner();
+            if (currentPlayer == player1) {
+                stateMachine.handleEvent(GameEvent.PLAYER1_MOVED);
+            }
+            else if (currentPlayer == player2) {
+                stateMachine.handleEvent(GameEvent.PLAYER2_MOVED);
+            }
+            updateView();
+            //updateMyTurn();
         }
     }
 
@@ -68,21 +164,23 @@ public class GameController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
+            currentMouseClick = new Point(e.getX(), e.getY());
+            handleMouseClick();
+            /*boolean valid = grid.isMouseOverValidField(e.getX(), e.getY());
+
             if (SwingUtilities.isLeftMouseButton(e)) {
                 updateFilledBy();
-                boolean refresh = grid.isMouseOverValidField(e.getX(), e.getY());
-                if (refresh) {
-                    stateMachine.handleEvent(GameEvent.PLAYER1_MOVED);
+                if (valid) {
+                    currentPlayer = player1;
+                    grid.makeTurn(e.getX(), e.getY(), currentPlayer);
                     grid.refreshGrid(e.getX(), e.getY(), filledBy);
-                    grid.refreshFieldStates();
-                    WinnerStatus winnerStatus = WinChecker.detectWinner(grid);
-                    if (winnerStatus == WinnerStatus.WINNER_PLAYER1 || winnerStatus == WinnerStatus.WINNER_PLAYER2) {
-                        System.out.println("Es gibt einen Gewinner!");
-                    }
-                    gPanel.setGrid(grid);
+                    grid.updateFieldStates();
+                    checkForWinner();
+                    stateMachine.handleEvent(GameEvent.PLAYER1_MOVED);
+                    updateView();
                     updateMyTurn();
                 }
-            }
+            }*/
         }
 
         public void updateFilledBy() {
@@ -111,12 +209,12 @@ public class GameController {
         @Override
         public void mouseMoved(MouseEvent e) {
             if (player1.isMyTurn()) {
-                grid.refreshHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
+                grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
             }
             else if (player2.isMyTurn()) {
-                grid.refreshHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
+                grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
             }
-            gPanel.setGrid(grid);
+            updateView();
         }
     }
 }

@@ -2,20 +2,21 @@ package view;
 
 import model.Field;
 import model.FieldStatus;
-import model.Grid;
 import model.HoverStatus;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
-public class GraphicsPanel extends JPanel {
+public class GridRenderer extends JPanel {
 
-    private transient Grid grid;
+    private transient Field[][] gridArray;
+    private Rectangle2D.Double rect;
     private final Color red;
     private final Color yellow;
-    Field lastHovered;
+    private transient Field lastHovered;
 
-    public GraphicsPanel() {
+    public GridRenderer() {
         setBackground(Color.WHITE);
         red = Color.RED;
         yellow = Color.YELLOW;
@@ -29,25 +30,39 @@ public class GraphicsPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Zeichne das Rechteck
+        drawRect(g2d);
+
+        // Zeichne die einzelnen Felder
+        drawFields(g2d);
+
+        // Färbt die Felder je nach Status ein
+        colorFields(g2d);
+
+        // Färbt Umrandung der Felder ein, wenn sie gehoveret werden
+        colorFieldBorderIfHovered(g2d);
+    }
+
+    private void drawRect(Graphics2D g2d) {
         Color rectColor = new Color(86, 86, 86);
         g2d.setColor(rectColor);
-        g2d.fill(grid.getField());
+        g2d.fill(rect);
+    }
 
-        // Zeichnet die leeren Kreise
+    private void drawFields(Graphics2D g2d) {
         g2d.setColor(Color.WHITE);
-
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
-                g2d.fill(grid.getGridArray()[i][j]);
+                g2d.fill(gridArray[i][j]);
             }
         }
+    }
 
-        // Färbt die Kreise je nach Status ein
+    private void colorFields(Graphics2D g2d) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
 
-                Field currentField = grid.getGridArray()[i][j];
-                FieldStatus currentStatus = grid.getGridArray()[i][j].getStatus();
+                Field currentField = gridArray[i][j];
+                FieldStatus currentStatus = gridArray[i][j].getStatus();
 
                 if (currentStatus == FieldStatus.FILLED_BY_PLAYER1) {
                     g2d.setColor(red);
@@ -57,10 +72,19 @@ public class GraphicsPanel extends JPanel {
                     g2d.setColor(yellow);
                     g2d.fill(currentField);
                 }
+            }
+        }
+    }
+
+    private void colorFieldBorderIfHovered(Graphics2D g2d) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+
+                Field currentField = gridArray[i][j];
+
                 if (currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER1 || currentField.getHover() == HoverStatus.HOVERED_BY_PLAYER2) {
                     drawCircleOverHoveredField(currentField, g2d);
-                    Cursor currentCursor = new Cursor(Cursor.HAND_CURSOR);
-                    setCursor(currentCursor);
+                    setCursor(new Cursor(Cursor.HAND_CURSOR));
                     lastHovered = currentField;
                 }
                 if (lastHovered.getHover() == HoverStatus.NO_HOVER) {
@@ -88,8 +112,13 @@ public class GraphicsPanel extends JPanel {
         g2d.drawOval(x, y, width, height);
     }
 
-    public void setGrid(Grid grid) {
-        this.grid = grid;
+    public void setGridAndRepaint(Field[][] grid) {
+        this.gridArray = grid;
+        repaint();
+    }
+
+    public void setRectAndRepaint(Rectangle2D.Double rect) {
+        this.rect = rect;
         repaint();
     }
 }
