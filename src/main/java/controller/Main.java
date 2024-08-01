@@ -26,7 +26,7 @@ public class Main {
         @Override
         public void actionPerformed(ActionEvent e) {
             gc = new GameController();
-            HumanPlayer player = new HumanPlayer("Player1", 2, Color.YELLOW, false);
+            HumanPlayer player = new HumanPlayer("Player1", 2, Color.YELLOW);
             gc.startGame(player);
             gui.dispose();
         }

@@ -42,16 +42,16 @@ public class Grid {
         int fieldWidth = panelWidth - (xPos * 2);
         int fieldHeight = panelHeight - (yPos * 2);
         field.setRect(xPos, yPos, fieldWidth, fieldHeight);
-        System.out.println("Rechteck: Heigth=" + field.getHeight() + "Width=" + field.getWidth());
+        System.out.println("Rect: Heigth = " + field.getHeight() + "Width = " + field.getWidth());
     }
 
     private void updateEllipseCoordinates() {
 
         double fieldHeight = field.getHeight();
         double fieldWidth = field.getWidth();
-        double gap = 30; // Abstand zwischen den Feldern
+        final double gap = 30; // Abstand zwischen den Feldern
         double yDiameter = (fieldHeight - (7 * gap)) / 6; // (Höhe des Rechtecks - (7 * Abstand)) / 6 Felder
-        double xDiameter = (fieldWidth - (8 * gap)) / 7; // (Weite des Rechtecks - (8 * Abstand)) / 7 Felder
+        double xDiameter = (fieldWidth - (8 * gap)) / 7; // (Breite des Rechtecks - (8 * Abstand)) / 7 Felder
         double xCord = field.getX() + gap;
         double yCord = field.getY() + gap;
 
@@ -80,33 +80,12 @@ public class Grid {
         return isValid;
     }
 
-    public void makeTurn(int xCord, int yCord, Player currentPlayer) throws RuntimeException {
-        if (!isMouseOverValidField(xCord, yCord)) {
-            throw new RuntimeException();
-        }
-        else {
-            fillField(xCord, yCord, currentPlayer);
-        }
-    }
-
-    private void fillField(int xCord, int yCord, Player currentPlayer) {
+    public void fillField(int xCord, int yCord, Player currentPlayer) {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
                 Field currentField = getGridArray()[i][j];
                 if (currentField.contains(xCord, yCord)) {
                     currentField.setStatus(currentPlayer.getFieldStatus());
-                }
-            }
-        }
-    }
-
-    // Verändert den Status des Feldes
-    public void refreshGrid(int x, int y, FieldStatus filledBy) {
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 6; j++) {
-                Field currentField = getGridArray()[i][j];
-                if (currentField.contains(x,y) && currentField.getStatus() == UNFILLED_FILLABLE) {
-                    currentField.setStatus(filledBy);
                 }
             }
         }
@@ -144,7 +123,7 @@ public class Grid {
                 }
             }
         }
-        printFieldStates();
+        //printFieldStates();
     }
 
     // Aktualisiert die Status der Felder
@@ -158,7 +137,7 @@ public class Grid {
                 }
             }
         }
-        printFieldStates();
+        //printFieldStates();
     }
 
     public void printFieldStates() {

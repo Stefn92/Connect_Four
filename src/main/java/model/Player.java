@@ -7,13 +7,11 @@ public abstract class Player {
     protected String name;
     protected int playerNumber;
     protected Color fieldColor;
-    protected boolean myTurn;
 
-    protected Player(String name, int playerNumber, Color fieldColor, boolean myTurn) {
+    protected Player(String name, int playerNumber, Color fieldColor) {
         this.name = name;
         this.playerNumber = playerNumber;
         this.fieldColor = fieldColor;
-        this.myTurn = myTurn;
     }
 
     public String getName() {
@@ -38,14 +36,6 @@ public abstract class Player {
 
     public void setFieldColor(Color fieldColor) {
         this.fieldColor = fieldColor;
-    }
-
-    public boolean isMyTurn() {
-        return myTurn;
-    }
-
-    public void setMyTurn(boolean myTurn) {
-        this.myTurn = myTurn;
     }
 
     public FieldStatus getFieldStatus() {

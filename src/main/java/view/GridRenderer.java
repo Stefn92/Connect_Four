@@ -38,6 +38,9 @@ public class GridRenderer extends JPanel {
         // Färbt die Felder je nach Status ein
         colorFields(g2d);
 
+        // Färbt die gewinnenden Felder ein
+        colorFieldBorderIfWinning(g2d);
+
         // Färbt Umrandung der Felder ein, wenn sie gehoveret werden
         colorFieldBorderIfHovered(g2d);
     }
@@ -71,6 +74,25 @@ public class GridRenderer extends JPanel {
                 else if (currentStatus == FieldStatus.FILLED_BY_PLAYER2) {
                     g2d.setColor(yellow);
                     g2d.fill(currentField);
+                }
+            }
+        }
+    }
+
+    private void colorFieldBorderIfWinning(Graphics2D g2d) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+
+                Field currentField = gridArray[i][j];
+                int x = (int) currentField.getX();
+                int y = (int) currentField.getY();
+                int width = (int) currentField.getWidth();
+                int height = (int) currentField.getHeight();
+
+                if (currentField.isWinning()) {
+                    g2d.setColor(Color.BLACK);
+                    g2d.setStroke(new BasicStroke(6));
+                    g2d.drawOval(x, y, width, height);
                 }
             }
         }

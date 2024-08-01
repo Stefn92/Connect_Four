@@ -9,7 +9,7 @@ public class GameStateMachine {
     }
 
     public void changeState(GameState newState) {
-        System.out.println("Changing state from " + currentGameState + " to " + newState);
+        System.out.println("changing game state from " + currentGameState + " to " + newState);
         currentGameState = newState;
     }
 
