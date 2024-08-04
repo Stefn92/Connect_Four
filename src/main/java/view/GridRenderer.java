@@ -30,7 +30,7 @@ public class GridRenderer extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Zeichne das Rechteck
-        drawRect(g2d);
+        drawBoard(g2d);
 
         // Zeichne die einzelnen Felder
         drawFields(g2d);
@@ -45,7 +45,7 @@ public class GridRenderer extends JPanel {
         colorFieldBorderIfHovered(g2d);
     }
 
-    private void drawRect(Graphics2D g2d) {
+    private void drawBoard(Graphics2D g2d) {
         Color rectColor = new Color(86, 86, 86);
         g2d.setColor(rectColor);
         g2d.fill(rect);
@@ -134,13 +134,11 @@ public class GridRenderer extends JPanel {
         g2d.drawOval(x, y, width, height);
     }
 
-    public void setGridAndRepaint(Field[][] grid) {
+    public void setGrid(Field[][] grid) {
         this.gridArray = grid;
-        repaint();
     }
 
-    public void setRectAndRepaint(Rectangle2D.Double rect) {
+    public void setRect(Rectangle2D.Double rect) {
         this.rect = rect;
-        repaint();
     }
 }

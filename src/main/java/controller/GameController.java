@@ -11,7 +11,8 @@ import java.awt.geom.Rectangle2D;
 
 public class GameController {
 
-    private final Grid grid;
+    private final GameGrid gameGrid;
+    private final GameBoard gameBoard;
     private final GridRenderer gridRenderer;
     private GridFrame gFrame;
     private Player player1;
@@ -19,7 +20,8 @@ public class GameController {
     private final GameStateMachine stateMachine;
 
     public GameController() {
-        this.grid = new Grid();
+        this.gameGrid = new GameGrid();
+        this.gameBoard = new GameBoard();
         this.gridRenderer = new GridRenderer();
         setupMouseHoverListener();
         setupResizeListener();
@@ -46,23 +48,30 @@ public class GameController {
     }
 
     public void calculateGrid() {
-        grid.fillGridArray();
 
-        int width = gridRenderer.getWidth();
-        int height = gridRenderer.getHeight();
-
-        grid.updateGridDimensions(width, height);
-        grid.resetFieldStates();
-        grid.updateFieldStates();
+        updateBoardCoordinates();
+        gameGrid.resetFieldStates();
+        gameGrid.updateFieldStates();
         updateView();
     }
 
     public void updateView() {
-        Field[][] gridArray = grid.getGridArray();
-        Rectangle2D.Double rect = grid.getField();
+        Field[][] gridArray = gameGrid.getFields();
+        Rectangle2D.Double rect = gameBoard.getBoard();
 
-        gridRenderer.setGridAndRepaint(gridArray);
-        gridRenderer.setRectAndRepaint(rect);
+        gridRenderer.setGrid(gridArray);
+        gridRenderer.setRect(rect);
+
+        gridRenderer.repaint();
+    }
+
+    public void updateBoardCoordinates() {
+        int width = gridRenderer.getWidth();
+        int height = gridRenderer.getHeight();
+        Rectangle2D.Double board = gameBoard.getBoard();
+
+        gameBoard.updateBoardCoordinates(width, height);
+        gameGrid.updateFieldCoordinates(board);
     }
 
     public void setupMouseListener() {
@@ -80,9 +89,7 @@ public class GameController {
         this.gridRenderer.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int width = gridRenderer.getWidth();
-                int height = gridRenderer.getHeight();
-                grid.updateGridDimensions(width, height);
+                updateBoardCoordinates();
                 updateView();
             }
         });
@@ -94,10 +101,10 @@ public class GameController {
             public void mouseMoved(MouseEvent e) {
                 GameState currentState = stateMachine.getCurrentGameState();
                 if (currentState == GameState.PLAYER1_TURN) {
-                    grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
+                    gameGrid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
                 }
                 else if (currentState == GameState.PLAYER2_TURN) {
-                    grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
+                    gameGrid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
                 }
                 updateView();
             }
@@ -128,14 +135,14 @@ public class GameController {
     }
 
     public void playerTakeTurn(int x, int y, Player currentPlayer) {
-            grid.fillField(x, y, currentPlayer);
-            grid.updateFieldStates();
+            gameGrid.fillField(x, y, currentPlayer);
+            gameGrid.updateFieldStates();
             checkForWinner();
             updateView();
     }
 
     public void checkForWinner() {
-        Field[][] gridArray = grid.getGridArray();
+        Field[][] gridArray = gameGrid.getFields();
         WinnerStatus winnerStatus = WinChecker.detectWinner(gridArray);
         if (winnerStatus == WinnerStatus.WINNER_PLAYER1 || winnerStatus == WinnerStatus.WINNER_PLAYER2) {
             System.out.println("someone has won the game: " + winnerStatus);
@@ -148,7 +155,7 @@ public class GameController {
         int x = e.getX();
         int y = e.getY();
 
-        if (grid.isMouseOverValidField(x, y)) {
+        if (gameGrid.isMouseOverValidField(x, y)) {
             System.out.println("valid mouseevent at x = " + x + ", y = " + y);
             handleTurn(e);
         }

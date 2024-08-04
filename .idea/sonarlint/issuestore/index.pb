@@ -41,12 +41,8 @@ R
 ,src/main/java/controller/GameController.java,8\b\8bb88644e2407c8e62c22e68ac7ffa4dac28ef68
 T
 $src/main/java/model/HumanPlayer.java,4\5\4568be49c3478696edafe98da2d1a27aeca0bd6b
-U
-%src/main/java/view/GraphicsFrame.java,3\1\31ca3043e52cc3f0ae4a9445891d8d7d0a85990c
 M
 src/main/java/model/Grid.java,7\f\7f233808262174ac54ae8ba8791547f6a73c363a
-U
-%src/main/java/view/GraphicsPanel.java,5\9\597ef346e0a43f445bbb351080f6299602b27c1e
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 S
@@ -65,3 +61,5 @@ Y
 )src/main/java/model/GameStateMachine.java,6\6\660bcf6a579d117f37a5d7e4a740fa68d3af84fa
 T
 $src/main/java/view/GridRenderer.java,d\4\d476bec23575ef4970ce23ad02986723bbc6d0e8
+Q
+!src/main/java/view/GridFrame.java,7\6\7663447e6b6b85e4cbc14d346f438c5b22f02bc1
