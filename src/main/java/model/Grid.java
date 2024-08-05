@@ -1,14 +1,12 @@
 package model;
 
-import java.awt.geom.Rectangle2D;
-
 /**
  * Diese Klasse beinhaltet das zweidimensionale Array "gridArray", welches das Spielfeld darstellt.
  * Außerdem befinden sich hier Methoden, um die Inhalte des "gridArray" zu verändern, wie z.B. die Positionsdaten
  * oder den aktuellen Status des Feldes.
  */
 
-public class GameGrid {
+public class Grid {
 
     private Field[][] fields; // Array für die Felder im Spielfeld
     private static final FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
@@ -16,12 +14,12 @@ public class GameGrid {
     private static final int ROW_LENGTH = 7;
     private static final int COL_LENGTH = 6;
 
-    public GameGrid() {
+    public Grid() {
         fields = new Field[ROW_LENGTH][COL_LENGTH];
         fillFields();
     }
 
-    public void fillFields() {
+    private void fillFields() {
         for (int i = 0; i < ROW_LENGTH; i++) {
             for (int j = 0; j < COL_LENGTH; j++) {
                 fields[i][j] = new Field();
@@ -29,41 +27,40 @@ public class GameGrid {
         }
     }
 
-    public void updateFieldCoordinates(Rectangle2D.Double board) {
+    public void updateFieldCoordinates(Board board) {
 
         double fieldHeight = board.getHeight();
         double fieldWidth = board.getWidth();
-        final double gap = 30; // Abstand zwischen den Feldern
-        double yDiameter = (fieldHeight - (7 * gap)) / 6; // (Höhe des Rechtecks - (7 * Abstand)) / 6 Felder
-        double xDiameter = (fieldWidth - (8 * gap)) / 7; // (Breite des Rechtecks - (8 * Abstand)) / 7 Felder
-        double xCord = board.getX() + gap;
-        double yCord = board.getY() + gap;
+        final double GAP = 30; // Abstand zwischen den Feldern
+        double yDiameter = (fieldHeight - (7 * GAP)) / 6; // (Höhe des Rechtecks - (7 * Abstand)) / 6 Felder
+        double xDiameter = (fieldWidth - (8 * GAP)) / 7; // (Breite des Rechtecks - (8 * Abstand)) / 7 Felder
+        double xCord = board.getX() + GAP;
+        double yCord = board.getY() + GAP;
 
         for (int i = 6; i >= 0; i--) {
             for (int j = 5; j >= 0; j--) {
                 fields[i][j].setFrame(xCord, yCord, xDiameter, yDiameter);
-                yCord += yDiameter + gap;
+                yCord += yDiameter + GAP;
             }
-            yCord = board.getY() + gap;
-            xCord += xDiameter + gap;
+            yCord = board.getY() + GAP;
+            xCord += xDiameter + GAP;
         }
     }
 
     // Prüft, ob die Maus über einem Feld ist und ob es gefüllt werden kann
     public boolean isMouseOverValidField(int x, int y) {
-        boolean isValid = false;
         for (int i = 0; i < ROW_LENGTH; i++) {
             for (int j = 0; j < COL_LENGTH; j++) {
                 Field currentField = getFields()[i][j];
                 if (currentField.contains(x, y) && currentField.getStatus() == UNFILLED_FILLABLE) {
-                    isValid = true;
-                    break;
+                    return true;
                 }
             }
         }
-        return isValid;
+        return false;
     }
 
+    //
     public void fillField(int xCord, int yCord, Player currentPlayer) {
         for (int i = 0; i < ROW_LENGTH; i++) {
             for (int j = 0; j < COL_LENGTH; j++) {

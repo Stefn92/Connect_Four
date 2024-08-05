@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame {
+public class MainMenu extends JFrame {
 
     JPanel mainPanel;
     JButton resumeButton;
@@ -13,7 +13,7 @@ public class GUI extends JFrame {
     JButton statisticsButton;
     JButton endGameButton;
 
-    public GUI() {
+    public MainMenu() {
 
         mainPanel = new JPanel(new GridLayout(3, 1));
         setContentPane(mainPanel);

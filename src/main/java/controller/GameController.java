@@ -11,8 +11,8 @@ import java.awt.geom.Rectangle2D;
 
 public class GameController {
 
-    private final GameGrid gameGrid;
-    private final GameBoard gameBoard;
+    private final Grid gameGrid;
+    private final Board gameBoard;
     private final GridRenderer gridRenderer;
     private GridFrame gFrame;
     private Player player1;
@@ -20,8 +20,8 @@ public class GameController {
     private final GameStateMachine stateMachine;
 
     public GameController() {
-        this.gameGrid = new GameGrid();
-        this.gameBoard = new GameBoard();
+        this.gameGrid = new Grid();
+        this.gameBoard = new Board();
         this.gridRenderer = new GridRenderer();
         setupMouseHoverListener();
         setupResizeListener();
@@ -48,7 +48,6 @@ public class GameController {
     }
 
     public void calculateGrid() {
-
         updateBoardCoordinates();
         gameGrid.resetFieldStates();
         gameGrid.updateFieldStates();
@@ -57,10 +56,10 @@ public class GameController {
 
     public void updateView() {
         Field[][] gridArray = gameGrid.getFields();
-        Rectangle2D.Double rect = gameBoard.getBoard();
+        Rectangle2D.Double rect = gameBoard.getBoardAsRectangle2D();
 
-        gridRenderer.setGrid(gridArray);
         gridRenderer.setRect(rect);
+        gridRenderer.setGrid(gridArray);
 
         gridRenderer.repaint();
     }
@@ -68,10 +67,9 @@ public class GameController {
     public void updateBoardCoordinates() {
         int width = gridRenderer.getWidth();
         int height = gridRenderer.getHeight();
-        Rectangle2D.Double board = gameBoard.getBoard();
 
         gameBoard.updateBoardCoordinates(width, height);
-        gameGrid.updateFieldCoordinates(board);
+        gameGrid.updateFieldCoordinates(gameBoard);
     }
 
     public void setupMouseListener() {
@@ -143,7 +141,7 @@ public class GameController {
 
     public void checkForWinner() {
         Field[][] gridArray = gameGrid.getFields();
-        WinnerStatus winnerStatus = WinChecker.detectWinner(gridArray);
+        WinnerStatus winnerStatus = WinDetector.detectWinner(gridArray);
         if (winnerStatus == WinnerStatus.WINNER_PLAYER1 || winnerStatus == WinnerStatus.WINNER_PLAYER2) {
             System.out.println("someone has won the game: " + winnerStatus);
             stateMachine.changeState(GameState.GAME_OVER);

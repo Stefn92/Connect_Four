@@ -4,7 +4,7 @@ package model;
  * Diese Klasse beinhaltet Methoden, um einen Sieger zu erkennen.
  */
 
-public class WinChecker {
+public class WinDetector {
 
     private static Field[][] gridArray;
     private static final WinnerStatus WINNER_PLAYER1 = WinnerStatus.WINNER_PLAYER1;
@@ -15,7 +15,7 @@ public class WinChecker {
     private static final FieldStatus FILLED_BY_PLAYER1 = FieldStatus.FILLED_BY_PLAYER1;
     private static final FieldStatus FILLED_BY_PLAYER2 = FieldStatus.FILLED_BY_PLAYER2;
 
-    private WinChecker() {}
+    private WinDetector() {}
 
     public static WinnerStatus detectWinner(Field[][] grid) {
         gridArray = grid;
@@ -50,12 +50,10 @@ public class WinChecker {
                 if (currentStatus == FILLED_BY_PLAYER1) {
                     inARowPlayer1++;
                     inARowPlayer2 = 0;
-                    currentField.setWinning(true);
                 }
                 else if (currentStatus == FILLED_BY_PLAYER2) {
                     inARowPlayer2++;
                     inARowPlayer1 = 0;
-                    currentField.setWinning(true);
                 }
 
                 winner = check4InARow(inARowPlayer1, inARowPlayer2);
@@ -65,7 +63,6 @@ public class WinChecker {
             }
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
-            resetWinningFields();
         }
         return winner;
     }
@@ -131,24 +128,15 @@ public class WinChecker {
         return winner;
     }
 
-    private static WinnerStatus check4InARow(int player1, int player2) {
-        if (player1 == 4) {
+    private static WinnerStatus check4InARow(int inARowPlayer1, int inARowPlayer2) {
+        if (inARowPlayer1 == 4) {
             return WINNER_PLAYER1;
         }
-        else if (player2 == 4) {
+        else if (inARowPlayer2 == 4) {
             return WINNER_PLAYER2;
         }
         else {
             return NO_WINNER;
-        }
-    }
-
-    private static void resetWinningFields() {
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 6; j++) {
-                Field currentField = gridArray[i][j];
-                currentField.setWinning(false);
-            }
         }
     }
 }

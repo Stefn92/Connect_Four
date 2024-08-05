@@ -39,7 +39,7 @@ public class GridRenderer extends JPanel {
         colorFields(g2d);
 
         // Färbt die gewinnenden Felder ein
-        colorFieldBorderIfWinning(g2d);
+        //colorFieldBorderIfWinning(g2d);
 
         // Färbt Umrandung der Felder ein, wenn sie gehoveret werden
         colorFieldBorderIfHovered(g2d);

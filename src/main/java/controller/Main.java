@@ -1,7 +1,7 @@
 package controller;
 
 import model.HumanPlayer;
-import view.GUI;
+import view.MainMenu;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
 public class Main {
 
     private GameController gc;
-    private GUI gui;
+    private MainMenu gui;
 
     public static void main(String[] args) {
         Main main = new Main();
     }
 
     public Main() {
-        gui = new GUI();
+        gui = new MainMenu();
         gui.addRestartAgainstPlayerListener(new PlayAgainstPlayerClass());
     }
 
