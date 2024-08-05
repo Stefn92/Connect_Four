@@ -37,8 +37,6 @@ K
 src/main/java/view/GUI.java,0\b\0b019c41aa0ad7b596dd8aec4a64a146207e1df5
 T
 $src/main/java/model/HumanPlayer.java,4\5\4568be49c3478696edafe98da2d1a27aeca0bd6b
-U
-%src/main/java/view/GraphicsFrame.java,3\1\31ca3043e52cc3f0ae4a9445891d8d7d0a85990c
 R
 "src/main/java/controller/Main.java,6\5\650fa1777788e3539b02217f72bbbc04443393f5
 \
@@ -63,3 +61,5 @@ Y
 )src/main/java/model/GameStateMachine.java,6\6\660bcf6a579d117f37a5d7e4a740fa68d3af84fa
 T
 $src/main/java/view/GridRenderer.java,d\4\d476bec23575ef4970ce23ad02986723bbc6d0e8
+Q
+!src/main/java/view/GridFrame.java,7\6\7663447e6b6b85e4cbc14d346f438c5b22f02bc1

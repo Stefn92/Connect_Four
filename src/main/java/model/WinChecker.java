@@ -45,14 +45,17 @@ public class WinChecker {
             for (int j = 0; j < 6; j++) {
 
                 FieldStatus currentStatus = gridArray[i][j].getStatus();
+                Field currentField = gridArray[i][j];
 
                 if (currentStatus == FILLED_BY_PLAYER1) {
                     inARowPlayer1++;
                     inARowPlayer2 = 0;
+                    currentField.setWinning(true);
                 }
                 else if (currentStatus == FILLED_BY_PLAYER2) {
                     inARowPlayer2++;
                     inARowPlayer1 = 0;
+                    currentField.setWinning(true);
                 }
 
                 winner = check4InARow(inARowPlayer1, inARowPlayer2);
@@ -62,6 +65,7 @@ public class WinChecker {
             }
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
+            resetWinningFields();
         }
         return winner;
     }
@@ -108,9 +112,9 @@ public class WinChecker {
 
         int[] fieldLength = {4, 5, 6, 6, 5, 4};
 
-        int ROWS = 6;
-        int COLS = 7;
-        int WIN_COUNT = 4;
+        final int ROWS = 6;
+        final int COLS = 7;
+        final int WIN_COUNT = 4;
 
         for (int row = 0; row <= ROWS - WIN_COUNT; row++) {
             for (int col = 0; col <= COLS - WIN_COUNT; col++) {
@@ -136,6 +140,15 @@ public class WinChecker {
         }
         else {
             return NO_WINNER;
+        }
+    }
+
+    private static void resetWinningFields() {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+                Field currentField = gridArray[i][j];
+                currentField.setWinning(false);
+            }
         }
     }
 }

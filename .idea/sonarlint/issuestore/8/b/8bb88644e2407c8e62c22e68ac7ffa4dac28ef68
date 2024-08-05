@@ -1,16 +1,12 @@
 
-]	java:S125"<This block of commented-out lines of code should be removed.(½Åèâüÿÿÿÿ8€Õõô2
 O
-java:S1135+"2Complete the task associated to this TODO comment.(…ïœ†8Õõô2
+java:S1135("2Complete the task associated to this TODO comment.(…ïœ†8ßÀ„ı2
 O
-java:S11350"2Complete the task associated to this TODO comment.(…ïœ†8Õõô2
-u	java:S131i"YComplete cases by adding the missing enum constants or add a default case to this switch.(œ¿ŞÎ8ƒÕõô2
-]	java:S125q"<This block of commented-out lines of code should be removed.(¹ü©Çùÿÿÿÿ8„Õõô2
-H	java:S106‡"+Replace this use of System.out by a logger.(Ïøªß8„Õõô2
-Y	java:S125’"<This block of commented-out lines of code should be removed.(­¯®ä8…Õõô2
-Y	java:S125œ"<This block of commented-out lines of code should be removed.(İ˜æ¼8…Õõô2
-Y	java:S125©"<This block of commented-out lines of code should be removed.(Óóı¦8Ï÷ô2
-J
-java:S1128"(Remove this unused import 'javax.swing'.(Ìí¿Üüÿÿÿÿ8Ğ÷ô2
-G
-java:S1068"*Remove this unused "gFrame" private field.(¦çï…8‰Õõô2
+java:S1135-"2Complete the task associated to this TODO comment.(…ïœ†8àÀ„ı2
+9
+java:S6205p"Remove this redundant block.(şìù§8ìÀ„ı2
+M	java:S106"+Replace this use of System.out by a logger.(¨ìÜ£ûÿÿÿÿ8îÀ„ı2
+M	java:S106˜"+Replace this use of System.out by a logger.(÷Ù¤çÿÿÿÿÿ8ïÀ„ı2
+M	java:S106œ"+Replace this use of System.out by a logger.(×‰ªŒúÿÿÿÿ8ğÀ„ı2
+L
+java:S1068"*Remove this unused "gFrame" private field.(•ÙàÜşÿÿÿÿ8ğÀ„ı2

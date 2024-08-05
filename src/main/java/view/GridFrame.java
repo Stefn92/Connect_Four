@@ -3,13 +3,13 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class GraphicsFrame extends JFrame {
+public class GridFrame extends JFrame {
 
     GridRenderer gPanel;
     JPanel northPanel;
     JPanel mainPanel;
 
-    public GraphicsFrame(GridRenderer gPanel) {
+    public GridFrame(GridRenderer gPanel) {
 
         this.gPanel = gPanel;
 
@@ -25,7 +25,6 @@ public class GraphicsFrame extends JFrame {
         setContentPane(mainPanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1300, 1000);
-        //setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setVisible(true);
     }

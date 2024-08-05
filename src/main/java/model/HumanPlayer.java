@@ -8,7 +8,7 @@ public class HumanPlayer extends Player {
     Color chipColor;
     boolean myTurn;*/
 
-    public HumanPlayer(String name, int playerNumber, Color chipColor, boolean myTurn) {
-        super(name, playerNumber, chipColor, myTurn);
+    public HumanPlayer(String name, int playerNumber, Color chipColor) {
+        super(name, playerNumber, chipColor);
     }
 }

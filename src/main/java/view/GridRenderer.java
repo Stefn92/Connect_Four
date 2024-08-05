@@ -30,7 +30,7 @@ public class GridRenderer extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Zeichne das Rechteck
-        drawRect(g2d);
+        drawBoard(g2d);
 
         // Zeichne die einzelnen Felder
         drawFields(g2d);
@@ -38,11 +38,14 @@ public class GridRenderer extends JPanel {
         // Färbt die Felder je nach Status ein
         colorFields(g2d);
 
+        // Färbt die gewinnenden Felder ein
+        colorFieldBorderIfWinning(g2d);
+
         // Färbt Umrandung der Felder ein, wenn sie gehoveret werden
         colorFieldBorderIfHovered(g2d);
     }
 
-    private void drawRect(Graphics2D g2d) {
+    private void drawBoard(Graphics2D g2d) {
         Color rectColor = new Color(86, 86, 86);
         g2d.setColor(rectColor);
         g2d.fill(rect);
@@ -71,6 +74,25 @@ public class GridRenderer extends JPanel {
                 else if (currentStatus == FieldStatus.FILLED_BY_PLAYER2) {
                     g2d.setColor(yellow);
                     g2d.fill(currentField);
+                }
+            }
+        }
+    }
+
+    private void colorFieldBorderIfWinning(Graphics2D g2d) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 6; j++) {
+
+                Field currentField = gridArray[i][j];
+                int x = (int) currentField.getX();
+                int y = (int) currentField.getY();
+                int width = (int) currentField.getWidth();
+                int height = (int) currentField.getHeight();
+
+                if (currentField.isWinning()) {
+                    g2d.setColor(Color.BLACK);
+                    g2d.setStroke(new BasicStroke(6));
+                    g2d.drawOval(x, y, width, height);
                 }
             }
         }
@@ -112,13 +134,11 @@ public class GridRenderer extends JPanel {
         g2d.drawOval(x, y, width, height);
     }
 
-    public void setGridAndRepaint(Field[][] grid) {
+    public void setGrid(Field[][] grid) {
         this.gridArray = grid;
-        repaint();
     }
 
-    public void setRectAndRepaint(Rectangle2D.Double rect) {
+    public void setRect(Rectangle2D.Double rect) {
         this.rect = rect;
-        repaint();
     }
 }
