@@ -10,10 +10,10 @@ public class WinDetector {
     private static final WinnerStatus WINNER_PLAYER1 = WinnerStatus.WINNER_PLAYER1;
     private static final WinnerStatus WINNER_PLAYER2 = WinnerStatus.WINNER_PLAYER2;
     private static final WinnerStatus NO_WINNER = WinnerStatus.NO_WINNER;
-    private static final FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
-    private static final FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
-    private static final FieldStatus FILLED_BY_PLAYER1 = FieldStatus.FILLED_BY_PLAYER1;
-    private static final FieldStatus FILLED_BY_PLAYER2 = FieldStatus.FILLED_BY_PLAYER2;
+    private static final FillStatus UNFILLED_UNFILLABLE = FillStatus.UNFILLED_UNFILLABLE;
+    private static final FillStatus UNFILLED_FILLABLE = FillStatus.UNFILLED_FILLABLE;
+    private static final FillStatus FILLED_BY_PLAYER1 = FillStatus.FILLED_BY_PLAYER1;
+    private static final FillStatus FILLED_BY_PLAYER2 = FillStatus.FILLED_BY_PLAYER2;
 
     private WinDetector() {}
 
@@ -44,7 +44,7 @@ public class WinDetector {
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 6; j++) {
 
-                FieldStatus currentStatus = gridArray[i][j].getStatus();
+                FillStatus currentStatus = gridArray[i][j].getStatus();
                 Field currentField = gridArray[i][j];
 
                 if (currentStatus == FILLED_BY_PLAYER1) {
@@ -77,7 +77,7 @@ public class WinDetector {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
 
-                FieldStatus currentStatus = gridArray[j][i].getStatus();
+                FillStatus currentStatus = gridArray[j][i].getStatus();
 
                 if (currentStatus == FILLED_BY_PLAYER1) {
                     inARowPlayer1++;
