@@ -97,16 +97,20 @@ public class GameController {
         this.gridRenderer.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                GameState currentState = stateMachine.getCurrentGameState();
-                if (currentState == GameState.PLAYER1_TURN) {
-                    grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
-                }
-                else if (currentState == GameState.PLAYER2_TURN) {
-                    grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
-                }
-                updateView();
+                handleMouseHover(e);
             }
         });
+    }
+
+    public void handleMouseHover(MouseEvent e) {
+        GameState currentState = stateMachine.getCurrentGameState();
+        if (currentState == GameState.PLAYER1_TURN) {
+            grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER1);
+        }
+        else if (currentState == GameState.PLAYER2_TURN) {
+            grid.updateHoverStates(e.getX(), e.getY(), HoverStatus.HOVERED_BY_PLAYER2);
+        }
+        updateView();
     }
 
     public void player1Turn(int x, int y) {

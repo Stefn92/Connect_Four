@@ -1,34 +1,39 @@
 package controller;
 
+import model.GameModel;
 import model.HumanPlayer;
-import view.MainMenu;
+import model.Player;
+import view.GridFrame;
+import view.GridRenderer;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class Main {
-
-    private GameController gc;
-    private final MainMenu gui;
+    Player player;
 
     public static void main(String[] args) {
         Main main = new Main();
     }
 
     public Main() {
-        gui = new MainMenu();
-        gui.addRestartAgainstPlayerListener(new PlayAgainstPlayerClass());
+        player = new HumanPlayer("Player1", 2, Color.YELLOW);
+        //startGameNormal();
+        testInterface();
     }
 
-    class PlayAgainstPlayerClass implements ActionListener {
+    public void startGameNormal() {
+        GameController gc = new GameController();
+        gc.startGame(player);
+    }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            gc = new GameController();
-            HumanPlayer player = new HumanPlayer("Player1", 2, Color.YELLOW);
-            gc.startGame(player);
-            gui.dispose();
-        }
+    public void testInterface() {
+        GameModelInterface gameModelInterface = new GameModel();
+        GridRenderer gridRenderer = new GridRenderer();
+        GridFrame gridFrame = new GridFrame(gridRenderer);
+        GameLogic gameLogic = new GameLogic(gameModelInterface, gridRenderer);
+        InputController inputController = new InputController(gameLogic, gridRenderer);
+        gameLogic.startGame(player);
+
     }
 }
