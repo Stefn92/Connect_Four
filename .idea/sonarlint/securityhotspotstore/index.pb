@@ -48,8 +48,6 @@ R
 R
 "src/main/java/model/GameEvent.java,a\a\aa02f65370e43d6e7df9f65d37fdced3561aa369
 T
-$src/main/java/model/FieldStatus.java,b\6\b62fb67e8a45eb00ff506482163d8a7b11e97762
-T
 $src/main/java/model/HoverStatus.java,4\7\476b6512d62218533bd489cd5676f35a9d5804bc
 U
 %src/main/java/model/WinnerStatus.java,b\4\b47074bc431826b07c576ef283cee6bad960d2d8

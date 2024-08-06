@@ -129,8 +129,8 @@ public class GameController {
 
     public void endTurn() {
         grid.updateFieldStates();
-        checkForDraw();
         checkForWinner();
+        checkForDraw();
         updateView();
     }
 

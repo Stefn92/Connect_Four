@@ -8,6 +8,7 @@ public class GridFrame extends JFrame {
     GridRenderer gPanel;
     JPanel northPanel;
     JPanel mainPanel;
+    JButton testButton;
 
     public GridFrame(GridRenderer gPanel) {
 
@@ -16,8 +17,11 @@ public class GridFrame extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
 
         northPanel = new JPanel();
-        northPanel.setBackground(Color.BLACK);
+        northPanel.setBackground(Color.LIGHT_GRAY);
 
+        testButton = new JButton("Test123");
+
+        northPanel.add(testButton);
 
         mainPanel.add(BorderLayout.NORTH, northPanel);
         mainPanel.add(BorderLayout.CENTER, gPanel);
