@@ -9,8 +9,8 @@ package model;
 public class Grid {
 
     private Field[][] fields; // Array für die Felder im Spielfeld
-    private static final FieldStatus UNFILLED_UNFILLABLE = FieldStatus.UNFILLED_UNFILLABLE;
-    private static final FieldStatus UNFILLED_FILLABLE = FieldStatus.UNFILLED_FILLABLE;
+    private static final FillStatus UNFILLED_UNFILLABLE = FillStatus.UNFILLED_UNFILLABLE;
+    private static final FillStatus UNFILLED_FILLABLE = FillStatus.UNFILLED_FILLABLE;
     private static final int ROW_LENGTH = 7;
     private static final int COL_LENGTH = 6;
 
@@ -112,7 +112,7 @@ public class Grid {
         for (int i = 0; i < ROW_LENGTH; i++) {
             for (int j = 1; j < COL_LENGTH; j++) {
                 if (getFields()[i][j].getStatus() == UNFILLED_UNFILLABLE) {
-                    if (getFields()[i][j-1].getStatus() == FieldStatus.FILLED_BY_PLAYER2 || getFields()[i][j-1].getStatus() == FieldStatus.FILLED_BY_PLAYER1) {
+                    if (getFields()[i][j-1].getStatus() == FillStatus.FILLED_BY_PLAYER2 || getFields()[i][j-1].getStatus() == FillStatus.FILLED_BY_PLAYER1) {
                         getFields()[i][j].setStatus(UNFILLED_FILLABLE);
                     }
                 }

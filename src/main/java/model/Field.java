@@ -15,7 +15,7 @@ public class Field extends Ellipse2D {
     private double y;
     private double width;
     private double height;
-    private FieldStatus status;
+    private FillStatus status;
     private HoverStatus hover;
     private boolean isWinning;
 
@@ -24,7 +24,7 @@ public class Field extends Ellipse2D {
         this.y = 0;
         this.width = 0;
         this.height = 0;
-        this.status = FieldStatus.UNFILLED_UNFILLABLE;
+        this.status = FillStatus.UNFILLED_UNFILLABLE;
         this.hover = HoverStatus.NO_HOVER;
     }
 
@@ -80,11 +80,11 @@ public class Field extends Ellipse2D {
         return Objects.hash(super.hashCode(), getX(), getY(), getWidth(), getHeight(), getStatus());
     }
 
-    public FieldStatus getStatus() {
+    public FillStatus getStatus() {
         return status;
     }
 
-    public void setStatus(FieldStatus status) {
+    public void setStatus(FillStatus status) {
         this.status = status;
     }
 

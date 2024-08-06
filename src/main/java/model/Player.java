@@ -5,13 +5,15 @@ import java.awt.*;
 public abstract class Player {
 
     protected String name;
-    protected int playerNumber;
-    protected Color fieldColor;
+    protected final int playerNumber;
+    protected Color chipsColor;
+    protected byte chipsRemaining;
 
-    protected Player(String name, int playerNumber, Color fieldColor) {
+    protected Player(String name, int playerNumber, Color chipsColor) {
         this.name = name;
         this.playerNumber = playerNumber;
-        this.fieldColor = fieldColor;
+        this.chipsColor = chipsColor;
+        this.chipsRemaining = 21;
     }
 
     public String getName() {
@@ -26,26 +28,34 @@ public abstract class Player {
         return playerNumber;
     }
 
-    public void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
+    public Color getChipsColor() {
+        return chipsColor;
     }
 
-    public Color getFieldColor() {
-        return fieldColor;
+    public void setChipsColor(Color chipsColor) {
+        this.chipsColor = chipsColor;
     }
 
-    public void setFieldColor(Color fieldColor) {
-        this.fieldColor = fieldColor;
-    }
-
-    public FieldStatus getFieldStatus() {
+    public FillStatus getFieldStatus() {
         if (playerNumber == 1) {
-            return FieldStatus.FILLED_BY_PLAYER1;
+            return FillStatus.FILLED_BY_PLAYER1;
         } else if (playerNumber == 2) {
-            return FieldStatus.FILLED_BY_PLAYER2;
+            return FillStatus.FILLED_BY_PLAYER2;
         }
         else {
             return null;
         }
+    }
+
+    public void decrementChipsRemainingByOne() {
+        this.chipsRemaining--;
+    }
+
+    public byte getChipsRemaining() {
+        return chipsRemaining;
+    }
+
+    public void setChipsRemaining(byte chipsRemaining) {
+        this.chipsRemaining = chipsRemaining;
     }
 }

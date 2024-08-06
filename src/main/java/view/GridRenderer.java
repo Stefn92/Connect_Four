@@ -1,7 +1,7 @@
 package view;
 
 import model.Field;
-import model.FieldStatus;
+import model.FillStatus;
 import model.HoverStatus;
 
 import javax.swing.*;
@@ -41,7 +41,7 @@ public class GridRenderer extends JPanel {
         // Färbt die gewinnenden Felder ein
         //colorFieldBorderIfWinning(g2d);
 
-        // Färbt Umrandung der Felder ein, wenn sie gehoveret werden
+        // Färbt Umrandung der Felder ein, wenn sie gehovered werden
         colorFieldBorderIfHovered(g2d);
     }
 
@@ -65,13 +65,13 @@ public class GridRenderer extends JPanel {
             for (int j = 0; j < 6; j++) {
 
                 Field currentField = gridArray[i][j];
-                FieldStatus currentStatus = gridArray[i][j].getStatus();
+                FillStatus currentStatus = gridArray[i][j].getStatus();
 
-                if (currentStatus == FieldStatus.FILLED_BY_PLAYER1) {
+                if (currentStatus == FillStatus.FILLED_BY_PLAYER1) {
                     g2d.setColor(red);
                     g2d.fill(currentField);
                 }
-                else if (currentStatus == FieldStatus.FILLED_BY_PLAYER2) {
+                else if (currentStatus == FillStatus.FILLED_BY_PLAYER2) {
                     g2d.setColor(yellow);
                     g2d.fill(currentField);
                 }
@@ -116,7 +116,7 @@ public class GridRenderer extends JPanel {
         }
     }
 
-    // Zeichnet eine Umrandung um das Feld ein, wenn die Maus darüber hovert
+    // Zeichnet eine Umrandung um das Feld ein, wenn die Maus darüber hoverd
     private void drawCircleOverHoveredField(Field hoveredField, Graphics2D g2d) {
 
         int x = (int) hoveredField.getX();

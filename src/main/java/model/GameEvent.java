@@ -5,5 +5,5 @@ public enum GameEvent {
     PLAYER1_MOVED,
     PLAYER2_MOVED,
     RESTART_GAME,
-    END_GAME
+    GAME_ENDED
 }

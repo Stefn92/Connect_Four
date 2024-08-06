@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class Main {
 
     private GameController gc;
-    private MainMenu gui;
+    private final MainMenu gui;
 
     public static void main(String[] args) {
         Main main = new Main();
