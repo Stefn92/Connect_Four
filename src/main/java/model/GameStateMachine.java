@@ -28,6 +28,9 @@ public class GameStateMachine {
                 if (event == GameEvent.PLAYER1_MOVED) {
                     changeState(GameState.PLAYER2_TURN);
                 }
+                else if (event == GameEvent.RESTART_GAME) {
+                    changeState(GameState.GAME_START);
+                }
                 else if (event == GameEvent.GAME_ENDED) {
                     changeState(GameState.GAME_OVER);
                 }
@@ -35,6 +38,9 @@ public class GameStateMachine {
             case PLAYER2_TURN -> {
                 if (event == GameEvent.PLAYER2_MOVED) {
                     changeState(GameState.PLAYER1_TURN);
+                }
+                else if (event == GameEvent.RESTART_GAME) {
+                    changeState(GameState.GAME_START);
                 }
                 else if (event == GameEvent.GAME_ENDED) {
                     changeState(GameState.GAME_OVER);

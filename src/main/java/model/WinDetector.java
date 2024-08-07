@@ -14,6 +14,9 @@ public class WinDetector {
     private static final FillStatus UNFILLED_FILLABLE = FillStatus.UNFILLED_FILLABLE;
     private static final FillStatus FILLED_BY_PLAYER1 = FillStatus.FILLED_BY_PLAYER1;
     private static final FillStatus FILLED_BY_PLAYER2 = FillStatus.FILLED_BY_PLAYER2;
+    private static final int ROW_LENGTH = 7;
+    private static final int COL_LENGTH = 6;
+    private static final int WIN_COUNT = 4;
 
     private WinDetector() {}
 
@@ -41,11 +44,10 @@ public class WinDetector {
         int inARowPlayer1 = 0;
         int inARowPlayer2 = 0;
 
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < ROW_LENGTH; i++) {
+            for (int j = 0; j < COL_LENGTH; j++) {
 
                 FillStatus currentStatus = gridArray[i][j].getStatus();
-                Field currentField = gridArray[i][j];
 
                 if (currentStatus == FILLED_BY_PLAYER1) {
                     inARowPlayer1++;
@@ -55,11 +57,15 @@ public class WinDetector {
                     inARowPlayer2++;
                     inARowPlayer1 = 0;
                 }
+                else if (currentStatus == FillStatus.UNFILLED_FILLABLE || currentStatus == UNFILLED_UNFILLABLE) {
+                    inARowPlayer1 = 0;
+                    inARowPlayer2 = 0;
+                }
 
                 winner = check4InARow(inARowPlayer1, inARowPlayer2);
-            }
-            if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
-                break;
+                if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
+                    return winner;
+                }
             }
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
@@ -74,8 +80,8 @@ public class WinDetector {
         int inARowPlayer1 = 0;
         int inARowPlayer2 = 0;
 
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < COL_LENGTH; i++) {
+            for (int j = 0; j < ROW_LENGTH; j++) {
 
                 FillStatus currentStatus = gridArray[j][i].getStatus();
 
@@ -87,11 +93,15 @@ public class WinDetector {
                     inARowPlayer2++;
                     inARowPlayer1 = 0;
                 }
+                else if (currentStatus == FillStatus.UNFILLED_FILLABLE || currentStatus == UNFILLED_UNFILLABLE) {
+                    inARowPlayer1 = 0;
+                    inARowPlayer2 = 0;
+                }
 
                 winner = check4InARow(inARowPlayer1, inARowPlayer2);
-            }
-            if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
-                break;
+                if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
+                    return winner;
+                }
             }
             inARowPlayer1 = 0;
             inARowPlayer2 = 0;
@@ -120,19 +130,18 @@ public class WinDetector {
                         gridArray[row + 2][col + 2].getStatus() == FILLED_BY_PLAYER1 &&
                         gridArray[row + 3][col + 3].getStatus() == FILLED_BY_PLAYER1) {
                     winner = WinnerStatus.WINNER_PLAYER1;
-                    break;
+                    return winner;
                 }
             }
         }
-
         return winner;
     }
 
     private static WinnerStatus check4InARow(int inARowPlayer1, int inARowPlayer2) {
-        if (inARowPlayer1 == 4) {
+        if (inARowPlayer1 == WIN_COUNT) {
             return WINNER_PLAYER1;
         }
-        else if (inARowPlayer2 == 4) {
+        else if (inARowPlayer2 == WIN_COUNT) {
             return WINNER_PLAYER2;
         }
         else {

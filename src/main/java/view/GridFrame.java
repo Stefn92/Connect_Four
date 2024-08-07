@@ -8,7 +8,7 @@ public class GridFrame extends JFrame {
     GridRenderer gPanel;
     JPanel northPanel;
     JPanel mainPanel;
-    JButton testButton;
+    JButton restartButton;
 
     public GridFrame(GridRenderer gPanel) {
 
@@ -19,9 +19,9 @@ public class GridFrame extends JFrame {
         northPanel = new JPanel();
         northPanel.setBackground(Color.LIGHT_GRAY);
 
-        testButton = new JButton("Test123");
+        restartButton = new JButton("Spiel neustarten");
 
-        northPanel.add(testButton);
+        northPanel.add(restartButton);
 
         mainPanel.add(BorderLayout.NORTH, northPanel);
         mainPanel.add(BorderLayout.CENTER, gPanel);
@@ -31,5 +31,9 @@ public class GridFrame extends JFrame {
         setSize(1300, 1000);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public JButton getRestartButton() {
+        return restartButton;
     }
 }

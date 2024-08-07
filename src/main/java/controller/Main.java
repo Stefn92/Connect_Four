@@ -19,7 +19,7 @@ public class Main {
     public Main() {
         player = new HumanPlayer("Player1", 2, Color.YELLOW);
         //startGameNormal();
-        testInterface();
+        startGameTest();
     }
 
     public void startGameNormal() {
@@ -27,13 +27,13 @@ public class Main {
         gc.startGame(player);
     }
 
-    public void testInterface() {
+    public void startGameTest() {
         GameModelInterface gameModelInterface = new GameModel();
         GridRenderer gridRenderer = new GridRenderer();
         GridFrame gridFrame = new GridFrame(gridRenderer);
         GameLogic gameLogic = new GameLogic(gameModelInterface, gridRenderer);
-        InputController inputController = new InputController(gameLogic, gridRenderer);
-        gameLogic.startGame(player);
+        InputController inputController = new InputController(gameLogic, gridRenderer, gridFrame);
+        gameLogic.startGame();
 
     }
 }

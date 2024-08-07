@@ -17,6 +17,7 @@ public class Grid {
     public Grid() {
         fields = new Field[ROW_LENGTH][COL_LENGTH];
         fillFields();
+        resetFieldStates();
     }
 
     private void fillFields() {
