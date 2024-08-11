@@ -1,9 +1,5 @@
 package model;
 
-/**
- * Diese Klasse beinhaltet Methoden, um einen Sieger zu erkennen.
- */
-
 public class WinDetector {
 
     private static Field[][] gridArray;
@@ -17,6 +13,8 @@ public class WinDetector {
     private static final int ROW_LENGTH = 7;
     private static final int COL_LENGTH = 6;
     private static final int WIN_COUNT = 4;
+    private static int fieldsInARowPlayer1;
+    private static int fieldsInARowPlayer2;
 
     private WinDetector() {}
 
@@ -27,9 +25,9 @@ public class WinDetector {
         WinnerStatus horizontalWinnerStatus = detectHorizontalWinner();
         WinnerStatus diagonalWinnerStatus = detectDiagonalWinner();
 
-        if (verticalWinnerStatus == WINNER_PLAYER1 || horizontalWinnerStatus == WINNER_PLAYER1 || diagonalWinnerStatus == WinnerStatus.WINNER_PLAYER1) {
+        if (verticalWinnerStatus == WINNER_PLAYER1 || horizontalWinnerStatus == WINNER_PLAYER1 || diagonalWinnerStatus == WINNER_PLAYER1) {
             return WINNER_PLAYER1;
-        } else if (verticalWinnerStatus == WINNER_PLAYER2 || horizontalWinnerStatus == WINNER_PLAYER2 || diagonalWinnerStatus == WinnerStatus.WINNER_PLAYER2) {
+        } else if (verticalWinnerStatus == WINNER_PLAYER2 || horizontalWinnerStatus == WINNER_PLAYER2 || diagonalWinnerStatus == WINNER_PLAYER2) {
             return WINNER_PLAYER2;
         }
         else {
@@ -41,34 +39,19 @@ public class WinDetector {
 
         WinnerStatus winner = NO_WINNER;
 
-        int inARowPlayer1 = 0;
-        int inARowPlayer2 = 0;
+        resetFieldsInARowBothPlayers();
 
         for (int i = 0; i < ROW_LENGTH; i++) {
             for (int j = 0; j < COL_LENGTH; j++) {
 
                 FillStatus currentStatus = gridArray[i][j].getStatus();
-
-                if (currentStatus == FILLED_BY_PLAYER1) {
-                    inARowPlayer1++;
-                    inARowPlayer2 = 0;
-                }
-                else if (currentStatus == FILLED_BY_PLAYER2) {
-                    inARowPlayer2++;
-                    inARowPlayer1 = 0;
-                }
-                else if (currentStatus == FillStatus.UNFILLED_FILLABLE || currentStatus == UNFILLED_UNFILLABLE) {
-                    inARowPlayer1 = 0;
-                    inARowPlayer2 = 0;
-                }
-
-                winner = check4InARow(inARowPlayer1, inARowPlayer2);
+                changeFieldsInARowAccordingly(currentStatus);
+                winner = check4InARow();
                 if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
                     return winner;
                 }
             }
-            inARowPlayer1 = 0;
-            inARowPlayer2 = 0;
+            resetFieldsInARowBothPlayers();
         }
         return winner;
     }
@@ -77,34 +60,21 @@ public class WinDetector {
 
         WinnerStatus winner = NO_WINNER;
 
-        int inARowPlayer1 = 0;
-        int inARowPlayer2 = 0;
+        resetFieldsInARowBothPlayers();
 
         for (int i = 0; i < COL_LENGTH; i++) {
             for (int j = 0; j < ROW_LENGTH; j++) {
 
                 FillStatus currentStatus = gridArray[j][i].getStatus();
 
-                if (currentStatus == FILLED_BY_PLAYER1) {
-                    inARowPlayer1++;
-                    inARowPlayer2 = 0;
-                }
-                else if (currentStatus == FILLED_BY_PLAYER2) {
-                    inARowPlayer2++;
-                    inARowPlayer1 = 0;
-                }
-                else if (currentStatus == FillStatus.UNFILLED_FILLABLE || currentStatus == UNFILLED_UNFILLABLE) {
-                    inARowPlayer1 = 0;
-                    inARowPlayer2 = 0;
-                }
+                changeFieldsInARowAccordingly(currentStatus);
 
-                winner = check4InARow(inARowPlayer1, inARowPlayer2);
+                winner = check4InARow();
                 if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
                     return winner;
                 }
             }
-            inARowPlayer1 = 0;
-            inARowPlayer2 = 0;
+            resetFieldsInARowBothPlayers();
         }
         return winner;
     }
@@ -137,15 +107,63 @@ public class WinDetector {
         return winner;
     }
 
-    private static WinnerStatus check4InARow(int inARowPlayer1, int inARowPlayer2) {
-        if (inARowPlayer1 == WIN_COUNT) {
+    private static WinnerStatus check4InARow() {
+        if (fieldsInARowPlayer1 == WIN_COUNT) {
             return WINNER_PLAYER1;
         }
-        else if (inARowPlayer2 == WIN_COUNT) {
+        else if (fieldsInARowPlayer2 == WIN_COUNT) {
             return WINNER_PLAYER2;
         }
         else {
             return NO_WINNER;
         }
+    }
+
+    private static boolean isFieldNotFilled(FillStatus currentStatus) {
+        return currentStatus == UNFILLED_UNFILLABLE || currentStatus == UNFILLED_FILLABLE;
+    }
+
+    private static boolean isFieldFilledByPlayer1(FillStatus currentStatus) {
+        return currentStatus == FILLED_BY_PLAYER1;
+    }
+
+    private static boolean isFieldFilledByPlayer2(FillStatus currentStatus) {
+        return currentStatus == FILLED_BY_PLAYER2;
+    }
+
+    private static void changeFieldsInARowAccordingly(FillStatus currentStatus) {
+        if (isFieldFilledByPlayer1(currentStatus)) {
+            incrementFieldsInARowPlayer1ByOne();
+            resetFieldsInARowPLayer2();
+        }
+        else if (isFieldFilledByPlayer2(currentStatus)) {
+            incrementFieldsInARowPlayer2ByOne();
+            resetFieldsInARowPlayer1();
+        }
+        else if (isFieldNotFilled(currentStatus)) {
+            resetFieldsInARowPlayer1();
+            resetFieldsInARowPLayer2();
+        }
+    }
+
+    private static void incrementFieldsInARowPlayer1ByOne() {
+        fieldsInARowPlayer1++;
+    }
+
+    private static void incrementFieldsInARowPlayer2ByOne() {
+        fieldsInARowPlayer2++;
+    }
+
+    private static void resetFieldsInARowPlayer1() {
+        fieldsInARowPlayer1 = 0;
+    }
+
+    private static void resetFieldsInARowPLayer2() {
+        fieldsInARowPlayer2 = 0;
+    }
+
+    private static void resetFieldsInARowBothPlayers() {
+        resetFieldsInARowPlayer1();
+        resetFieldsInARowPLayer2();
     }
 }
