@@ -29,19 +29,12 @@ public class GridRenderer extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Zeichne das Rechteck
         drawBoard(g2d);
 
-        // Zeichne die einzelnen Felder
         drawFields(g2d);
 
-        // Färbt die Felder je nach Status ein
         colorFields(g2d);
 
-        // Färbt die gewinnenden Felder ein
-        //colorFieldBorderIfWinning(g2d);
-
-        // Färbt Umrandung der Felder ein, wenn sie gehovered werden
         colorFieldBorderIfHovered(g2d);
     }
 

@@ -63,3 +63,5 @@ T
 $src/main/java/model/WinDetector.java,b\6\b609c7731907bde40ee54cf5a190db356f740cf2
 N
 src/main/java/model/Board.java,b\2\b2f37037f55c413b14705f67468cf878c2f30dcb
+W
+'src/main/java/controller/GameLogic.java,9\c\9cad8b26a8b2128803ba1b0c67f3995f3ab54bcd

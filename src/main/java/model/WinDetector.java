@@ -92,17 +92,20 @@ public class WinDetector {
         final int ROWS = 6;
         final int COLS = 7;
         final int WIN_COUNT = 4;
+        int counter = 0;
 
         for (int row = 0; row <= ROWS - WIN_COUNT; row++) {
             for (int col = 0; col <= COLS - WIN_COUNT; col++) {
-                if (gridArray[row][col].getStatus() == FILLED_BY_PLAYER1 &&
-                        gridArray[row + 1][col + 1].getStatus() == FILLED_BY_PLAYER1 &&
-                        gridArray[row + 2][col + 2].getStatus() == FILLED_BY_PLAYER1 &&
-                        gridArray[row + 3][col + 3].getStatus() == FILLED_BY_PLAYER1) {
-                    winner = WinnerStatus.WINNER_PLAYER1;
+                if (gridArray[row + counter][col + counter].getStatus() == FILLED_BY_PLAYER1) {
+                    incrementFieldsInARowPlayer1ByOne();
+                }
+                if (fieldsInARowPlayer1 == 4) {
+                    winner = WINNER_PLAYER1;
                     return winner;
                 }
+                counter++;
             }
+            counter = 0;
         }
         return winner;
     }
