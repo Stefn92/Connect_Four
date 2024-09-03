@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.*;
+
 public class WinDetector {
 
     private static Field[][] gridArray;
@@ -87,14 +89,30 @@ public class WinDetector {
         int inARowPlayer1 = 0;
         int inARowPlayer2 = 0;
 
-        int[] fieldLength = {4, 5, 6, 6, 5, 4};
+        int[] fieldLength = {4, 5, 6};
 
         final int ROWS = 6;
         final int COLS = 7;
         final int WIN_COUNT = 4;
         int counter = 0;
 
-        for (int row = 0; row <= ROWS - WIN_COUNT; row++) {
+        resetFieldsInARowBothPlayers();
+
+        for (int i = 2; i > 0; i--) {
+            for (int j = 0; j < fieldLength[i]; j++) {
+                FillStatus currentStatus = gridArray[j][i].getStatus();
+                changeFieldsInARowAccordingly(currentStatus);
+                winner = check4InARow();
+                if (winner == WINNER_PLAYER1 || winner == WINNER_PLAYER2) {
+                    return winner;
+                }
+            }
+            resetFieldsInARowBothPlayers();
+        }
+        return winner;
+
+
+        /*for (int row = 0; row <= ROWS - WIN_COUNT; row++) {
             for (int col = 0; col <= COLS - WIN_COUNT; col++) {
                 if (gridArray[row + counter][col + counter].getStatus() == FILLED_BY_PLAYER1) {
                     incrementFieldsInARowPlayer1ByOne();
@@ -106,8 +124,7 @@ public class WinDetector {
                 counter++;
             }
             counter = 0;
-        }
-        return winner;
+        }*/
     }
 
     private static WinnerStatus check4InARow() {
